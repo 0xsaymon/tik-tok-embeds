@@ -82,29 +82,30 @@ export default function PlaygroundPage() {
           Тестування конфігурацій TikTok embed та перевірка можливостей кастомізації.
         </Typography>
 
-        <div className="mb-8 flex gap-2">
-          <div className="relative flex-1">
-            <Input
-              placeholder="Вставте TikTok URL (наприклад, https://www.tiktok.com/@username/video/1234567890)"
-              value={url}
-              onChange={e => setUrl(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && handleUrlSubmit()}
-              className={url ? 'pr-8' : ''}
-            />
-            {url && (
-              <button
-                onClick={() => setUrl('')}
-                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-2 -translate-y-1/2"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            )}
-          </div>
-          <Button onClick={handleUrlSubmit}>Завантажити</Button>
-        </div>
-
         <div className="grid min-h-0 flex-1 grid-cols-3 gap-8">
-          <div className="min-h-0 overflow-auto rounded-lg border p-6">
+          <div className="min-h-0 space-y-4 overflow-auto rounded-lg border p-6">
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <Input
+                  placeholder="TikTok URL або Video ID"
+                  value={url}
+                  onChange={e => setUrl(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && handleUrlSubmit()}
+                  className={url ? 'pr-8' : ''}
+                />
+                {url && (
+                  <button
+                    onClick={() => setUrl('')}
+                    className="text-muted-foreground hover:text-foreground absolute top-1/2 right-2 -translate-y-1/2"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+              <Button size="sm" onClick={handleUrlSubmit}>
+                Завантажити
+              </Button>
+            </div>
             <EmbedConfigPanel config={config} onConfigChange={updateConfig} activeTab={activeTab} />
           </div>
 
