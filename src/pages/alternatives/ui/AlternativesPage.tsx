@@ -202,15 +202,15 @@ export default function AlternativesPage() {
               <div>
                 <h4 className="font-semibold">Фаза 1 (MVP)</h4>
                 <p className="text-muted-foreground">
-                  Використовувати стандартний TikTok oEmbed з мінімальною обгорткою. Прийняти як
-                  функцію &quot;попереднього перегляду&quot;, що спрямовує трафік на TikTok.
+                  Використовувати Direct Iframe Player (/player/v1/) з оптимальними параметрами
+                  (rel=0, description=0) для чистого вигляду превью.
                 </p>
               </div>
               <div>
                 <h4 className="font-semibold">Фаза 2 (Покращення)</h4>
                 <p className="text-muted-foreground">
-                  Реалізувати підхід з мініатюрою: отримати дані oEmbed на сервері, показати
-                  кастомну картку з брендингом Zeely, завантажувати embed тільки при взаємодії.
+                  Мініатюра + lazy load: отримати thumbnail через oEmbed API, показати кастомну
+                  картку, завантажувати iframe тільки при взаємодії.
                 </p>
               </div>
               <div>

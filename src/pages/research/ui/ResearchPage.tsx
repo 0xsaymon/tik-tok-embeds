@@ -84,10 +84,11 @@ export default function ResearchPage() {
                   Чи можна прибрати метрики (лайки, коментарі)?
                 </td>
                 <td className="px-2 py-3">
-                  <strong>Частково</strong> — тільки через query-параметри iframe (music_info,
-                  description), але метрики залученості завжди видимі у стандартному embed.
+                  <strong>Так, через Iframe Player</strong> — 12 query-параметрів дозволяють
+                  приховати опис, музику, рекомендації, controls та інші елементи UI. В oEmbed —
+                  неможливо.
                 </td>
-                <td className="px-2 py-3 text-yellow-600">Обмежено</td>
+                <td className="px-2 py-3 text-green-600">Iframe: Так</td>
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-3">4</td>
@@ -108,7 +109,7 @@ export default function ResearchPage() {
 
         <h2 className="mb-6 text-2xl font-semibold">Технічні деталі реалізації</h2>
 
-        <h3 className="mb-3 text-xl font-semibold">Метод 1: oEmbed API (Рекомендований)</h3>
+        <h3 className="mb-3 text-xl font-semibold">Метод 1: oEmbed API (Офіційний)</h3>
         <p className="mb-2">
           <strong>Endpoint:</strong>{' '}
           <code className="bg-muted rounded px-2 py-1 text-xs sm:text-sm">
@@ -148,7 +149,7 @@ export default function ResearchPage() {
 
         <h4 className="mb-2 font-semibold">Недоліки:</h4>
         <ul className="mb-6 list-disc pl-6">
-          <li>Обмежена кастомізація</li>
+          <li>Нуль кастомізації внутрішніх елементів</li>
           <li>Брендинг TikTok незмінний</li>
           <li>Редирект на TikTok при взаємодії</li>
         </ul>
@@ -355,46 +356,41 @@ export default function ResearchPage() {
         <h2 className="mb-4 text-2xl font-semibold">Рекомендації для Zeely</h2>
 
         <h3 className="mb-3 text-xl font-semibold">Для MVP (Фаза 1)</h3>
-        <p className="mb-2 font-semibold">
-          Використовувати стандартний oEmbed з мінімальною обгорткою
-        </p>
+        <p className="mb-2 font-semibold">Використовувати Direct Iframe Player (/player/v1/)</p>
         <div className="bg-muted -mx-4 mb-4 rounded-lg p-4 sm:mx-0">
           <pre className="overflow-x-auto text-xs sm:text-sm">
-            <code>{`<div className="tiktok-embed-wrapper">
-  <blockquote
-    className="tiktok-embed"
-    data-video-id={videoId}
-    style={{ maxWidth: '400px' }}
-  >
-    <section />
-  </blockquote>
-</div>`}</code>
+            <code>{`<iframe
+  src="https://www.tiktok.com/player/v1/{videoId}?controls=1&progress_bar=1&play_button=1&rel=0&music_info=0"
+  width="325"
+  height="700"
+  allow="fullscreen"
+/>`}</code>
           </pre>
         </div>
         <p className="mb-2">
           <strong>Обгрунтування:</strong>
         </p>
         <ul className="mb-6 list-disc pl-6">
-          <li>Офіційне, стабільне рішення</li>
-          <li>Мінімальний юридичний ризик</li>
-          <li>Нульове обслуговування</li>
-          <li>Прийнятно для кейсу &quot;попередній перегляд&quot;</li>
+          <li>12 параметрів кастомізації UI</li>
+          <li>Явне задання розмірів</li>
+          <li>Можна приховати непотрібні елементи (рекомендації, опис, музику)</li>
+          <li>Autoplay + loop для кращого UX</li>
         </ul>
 
         <h3 className="mb-3 text-xl font-semibold">Для покращеного UX (Фаза 2)</h3>
-        <p className="mb-2 font-semibold">Мініатюра спочатку з відкладеним завантаженням</p>
+        <p className="mb-2 font-semibold">Мініатюра + lazy load iframe</p>
         <ol className="mb-4 list-decimal pl-6">
-          <li>Отримати дані oEmbed на сервері (включає мініатюру)</li>
+          <li>Отримати дані oEmbed API на сервері (включає мініатюру)</li>
           <li>Показати кастомну картку з мініатюрою, назвою, автором</li>
-          <li>Завантажити embed тільки при взаємодії користувача</li>
-          <li>Embed відкривається в модальному вікні або розгорнутому вигляді</li>
+          <li>Завантажити iframe тільки при взаємодії (клік/скрол)</li>
+          <li>Зменшити навантаження — без iframe до потреби</li>
         </ol>
         <p className="mb-2">
           <strong>Переваги:</strong>
         </p>
         <ul className="mb-6 list-disc pl-6">
           <li>Кастомний UI Zeely для сітки/списку</li>
-          <li>Продуктивність (без embed JS до потреби)</li>
+          <li>Продуктивність (без iframe до потреби)</li>
           <li>Краща візуальна інтеграція</li>
         </ul>
 
@@ -485,13 +481,13 @@ export default function ResearchPage() {
         <h3 className="mb-2 text-lg font-semibold">Тестове відео</h3>
         <ul className="mb-8 list-disc pl-6">
           <li>
-            <strong>ID:</strong> 7613863332826729761
+            <strong>ID:</strong> 7598731566696729870
           </li>
           <li>
-            <strong>Автор:</strong> @matildefaria__
+            <strong>Автор:</strong> @wilbur.maud
           </li>
           <li>
-            <strong>Контент:</strong> Samsung S26 Ultra демо фільтру приватності
+            <strong>Контент:</strong> Тестове відео для перевірки embed
           </li>
           <li>
             <strong>Статус:</strong> <span className="text-green-600">Embed працює коректно</span>
@@ -555,9 +551,11 @@ export default function ResearchPage() {
         <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20">
           <p className="mb-2 font-semibold">Підсумок:</p>
           <p>
-            TikTok embed створений для залучення трафіку на TikTok. Повна кастомізація UI навмисно
-            обмежена. Найкращий підхід для Zeely — прийняти embed як &quot;попередній перегляд&quot;
-            і зосередитися на оточуючому UI/UX, а не намагатися кастомізувати сам embed.
+            TikTok embed створений для залучення трафіку на TikTok. Повна кастомізація UI обмежена,
+            але <strong>Direct Iframe Player (/player/v1/)</strong> дає 12 параметрів для
+            налаштування відображення. Рекомендований підхід для Zeely — використовувати iframe
+            player з оптимальним набором параметрів (rel=0, description=0) для чистого вигляду
+            превью.
           </p>
         </div>
       </article>
