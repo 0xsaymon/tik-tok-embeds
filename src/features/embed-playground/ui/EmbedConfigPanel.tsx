@@ -30,7 +30,7 @@ function SwitchRow({
 }) {
   if (compact) {
     return (
-      <label className="flex items-center gap-1.5">
+      <label className="flex min-h-[28px] items-center gap-2 py-0.5">
         <Switch size="sm" checked={checked} onCheckedChange={onChange} />
         <span>{label}</span>
       </label>
@@ -102,7 +102,7 @@ function CompactIframeControls({
         <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
       {open && (
-        <div className="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
+        <div className="text-muted-foreground mt-3 grid grid-cols-2 gap-x-6 gap-y-3 text-xs min-[400px]:grid-cols-3">
           {IFRAME_CONTROLS.flatMap(group =>
             group.items.map(item => (
               <SwitchRow
