@@ -1,11 +1,11 @@
 import { ChevronDown } from 'lucide-react';
-import { useState } from 'react';
 
 import { Input } from '@/shared/ui-kit/components/ui/input';
 import { Label } from '@/shared/ui-kit/components/ui/label';
 import { Switch } from '@/shared/ui-kit/components/ui/switch';
 import { Typography } from '@/shared/ui-kit/components/ui/typography';
 
+import { useEmbedPlayground } from '../model/store';
 import type { EmbedConfig, TabValue } from '../model/types';
 
 interface EmbedConfigPanelProps {
@@ -30,8 +30,8 @@ function SwitchRow({
 }) {
   if (compact) {
     return (
-      <label className="flex min-h-[28px] items-center gap-2 py-0.5">
-        <Switch size="sm" checked={checked} onCheckedChange={onChange} />
+      <label className="flex min-h-[32px] items-center gap-2">
+        <Switch checked={checked} onCheckedChange={onChange} />
         <span>{label}</span>
       </label>
     );
@@ -84,7 +84,7 @@ function CompactIframeControls({
   config: EmbedConfig;
   onConfigChange: (partial: Partial<EmbedConfig>) => void;
 }) {
-  const [open, setOpen] = useState(false);
+  const { controlsOpen, setControlsOpen } = useEmbedPlayground();
   const activeCount = IFRAME_CONTROLS.flatMap(g => g.items).filter(
     i => config[i.key] as boolean,
   ).length;
@@ -93,16 +93,18 @@ function CompactIframeControls({
   return (
     <div>
       <button
-        onClick={() => setOpen(v => !v)}
-        className="text-muted-foreground flex w-full items-center justify-between text-xs"
+        onClick={() => setControlsOpen(!controlsOpen)}
+        className="text-muted-foreground flex w-full items-center justify-between py-1 text-xs"
       >
         <span>
           Параметри iframe ({activeCount}/{totalCount} увімкнено)
         </span>
-        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
+        <ChevronDown
+          className={`h-3.5 w-3.5 transition-transform ${controlsOpen ? 'rotate-180' : ''}`}
+        />
       </button>
-      {open && (
-        <div className="text-muted-foreground mt-3 grid grid-cols-2 gap-x-6 gap-y-3 text-xs min-[400px]:grid-cols-3">
+      {controlsOpen && (
+        <div className="text-muted-foreground mt-2 grid grid-cols-2 gap-x-6 gap-y-2.5 text-sm min-[400px]:grid-cols-3">
           {IFRAME_CONTROLS.flatMap(group =>
             group.items.map(item => (
               <SwitchRow

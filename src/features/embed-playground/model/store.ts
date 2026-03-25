@@ -5,13 +5,15 @@ import { parseTikTokUrl } from '../lib/parse-tiktok-url';
 import { DEFAULT_VIDEO_ID } from './constants';
 import type { EmbedConfig, TabValue } from './types';
 
-interface EmbedPlaygroundState {
+export interface EmbedPlaygroundState {
   config: EmbedConfig;
   url: string;
   activeTab: TabValue;
+  controlsOpen: boolean;
   updateConfig: (partial: Partial<EmbedConfig>) => void;
   setUrl: (url: string) => void;
   setActiveTab: (tab: TabValue) => void;
+  setControlsOpen: (open: boolean) => void;
   handleUrlSubmit: () => void;
 }
 
@@ -37,10 +39,12 @@ export const useEmbedPlayground = create<EmbedPlaygroundState>()(
       },
       url: '',
       activeTab: 'iframe' as TabValue,
+      controlsOpen: true,
 
       updateConfig: partial => set(state => ({ config: { ...state.config, ...partial } })),
       setUrl: url => set({ url }),
       setActiveTab: activeTab => set({ activeTab }),
+      setControlsOpen: controlsOpen => set({ controlsOpen }),
       handleUrlSubmit: () => {
         const { url, config } = get();
         const input = url || config.videoId;
@@ -56,6 +60,7 @@ export const useEmbedPlayground = create<EmbedPlaygroundState>()(
         config: state.config,
         activeTab: state.activeTab,
         url: state.url,
+        controlsOpen: state.controlsOpen,
       }),
     },
   ),
