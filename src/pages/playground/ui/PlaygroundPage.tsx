@@ -1,17 +1,14 @@
 import { X } from 'lucide-react';
 import { useMemo } from 'react';
 
-import type { TabValue } from '@/features/embed-playground';
-import {
-  buildIframeUrl,
-  EmbedConfigPanel,
-  EmbedPreview,
-  TABS,
-  useEmbedPlayground,
-} from '@/features/embed-playground';
+import { useEmbedPlayground } from '@/features/embed-playground';
+import type { TabValue } from '@/shared/lib/tiktok';
+import { buildIframeUrl, TABS } from '@/shared/lib/tiktok';
 import { Button } from '@/shared/ui-kit/components/ui/button';
 import { Input } from '@/shared/ui-kit/components/ui/input';
 import { Typography } from '@/shared/ui-kit/components/ui/typography';
+import { EmbedConfigPanel } from '@/widgets/embed-config-panel';
+import { EmbedPreview } from '@/widgets/embed-preview';
 
 function TabButtons({
   activeTab,
@@ -42,8 +39,17 @@ function TabButtons({
 }
 
 export default function PlaygroundPage() {
-  const { config, updateConfig, url, setUrl, activeTab, setActiveTab, handleUrlSubmit } =
-    useEmbedPlayground();
+  const {
+    config,
+    updateConfig,
+    url,
+    setUrl,
+    activeTab,
+    setActiveTab,
+    controlsOpen,
+    setControlsOpen,
+    handleUrlSubmit,
+  } = useEmbedPlayground();
 
   const iframeUrl = useMemo(() => buildIframeUrl(config), [config]);
 
@@ -137,6 +143,8 @@ export default function PlaygroundPage() {
               onConfigChange={updateConfig}
               activeTab={activeTab}
               compact
+              controlsOpen={controlsOpen}
+              onControlsToggle={() => setControlsOpen(!controlsOpen)}
             />
           </div>
         </div>

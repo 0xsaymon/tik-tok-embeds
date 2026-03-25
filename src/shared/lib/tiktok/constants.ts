@@ -1,0 +1,21 @@
+import type { EmbedConfig, TabValue } from './types';
+
+export const TABS: { value: TabValue; label: string }[] = [
+  { value: 'iframe', label: 'Iframe' },
+  { value: 'oembed', label: 'oEmbed' },
+];
+
+export const DEFAULT_IFRAME_CONFIG: Omit<EmbedConfig, 'videoId' | 'width' | 'height'> = {
+  autoplay: false,
+  muted: false,
+  loop: false,
+  musicInfo: true,
+  description: true,
+  rel: true,
+  controls: true,
+  progressBar: true,
+  playButton: true,
+  volumeControl: true,
+  fullscreenButton: true,
+  timestamp: true,
+};

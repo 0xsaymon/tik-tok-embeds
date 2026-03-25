@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { parseTikTokUrl } from '../lib/parse-tiktok-url';
-import { DEFAULT_VIDEO_ID } from './constants';
-import type { EmbedConfig, TabValue } from './types';
+import type { EmbedConfig, TabValue } from '@/shared/lib/tiktok';
+import { DEFAULT_IFRAME_CONFIG, parseTikTokUrl } from '@/shared/lib/tiktok';
+
+const DEFAULT_VIDEO_ID = '7598731566696729870';
 
 export interface EmbedPlaygroundState {
   config: EmbedConfig;
@@ -24,18 +25,7 @@ export const useEmbedPlayground = create<EmbedPlaygroundState>()(
         videoId: DEFAULT_VIDEO_ID,
         width: 325,
         height: 700,
-        autoplay: false,
-        muted: false,
-        loop: false,
-        musicInfo: true,
-        description: true,
-        rel: true,
-        controls: true,
-        progressBar: true,
-        playButton: true,
-        volumeControl: true,
-        fullscreenButton: true,
-        timestamp: true,
+        ...DEFAULT_IFRAME_CONFIG,
       },
       url: '',
       activeTab: 'iframe' as TabValue,

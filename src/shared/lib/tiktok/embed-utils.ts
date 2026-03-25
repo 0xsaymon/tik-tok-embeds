@@ -1,4 +1,4 @@
-import type { EmbedConfig } from '../model/types';
+import type { EmbedConfig } from './types';
 
 export function buildIframeUrl(config: EmbedConfig): string {
   const params = new URLSearchParams({

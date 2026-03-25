@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-import { reloadEmbedScript } from '../lib/embed-utils';
-import type { EmbedConfig, TabValue } from '../model/types';
+import type { EmbedConfig, TabValue } from '@/shared/lib/tiktok';
+import { reloadEmbedScript } from '@/shared/lib/tiktok';
 
 interface EmbedPreviewProps {
   activeTab: TabValue;

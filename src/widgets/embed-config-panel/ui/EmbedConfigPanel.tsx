@@ -1,18 +1,18 @@
 import { ChevronDown } from 'lucide-react';
 
+import type { EmbedConfig, TabValue } from '@/shared/lib/tiktok';
 import { Input } from '@/shared/ui-kit/components/ui/input';
 import { Label } from '@/shared/ui-kit/components/ui/label';
 import { Switch } from '@/shared/ui-kit/components/ui/switch';
 import { Typography } from '@/shared/ui-kit/components/ui/typography';
-
-import { useEmbedPlayground } from '../model/store';
-import type { EmbedConfig, TabValue } from '../model/types';
 
 interface EmbedConfigPanelProps {
   config: EmbedConfig;
   onConfigChange: (partial: Partial<EmbedConfig>) => void;
   activeTab: TabValue;
   compact?: boolean;
+  controlsOpen?: boolean;
+  onControlsToggle?: () => void;
 }
 
 function SwitchRow({
@@ -80,11 +80,14 @@ const IFRAME_CONTROLS: {
 function CompactIframeControls({
   config,
   onConfigChange,
+  controlsOpen = true,
+  onControlsToggle,
 }: {
   config: EmbedConfig;
   onConfigChange: (partial: Partial<EmbedConfig>) => void;
+  controlsOpen?: boolean;
+  onControlsToggle?: () => void;
 }) {
-  const { controlsOpen, setControlsOpen } = useEmbedPlayground();
   const activeCount = IFRAME_CONTROLS.flatMap(g => g.items).filter(
     i => config[i.key] as boolean,
   ).length;
@@ -92,17 +95,19 @@ function CompactIframeControls({
 
   return (
     <div>
-      <button
-        onClick={() => setControlsOpen(!controlsOpen)}
-        className="text-muted-foreground flex w-full items-center justify-between py-1 text-xs"
-      >
-        <span>
-          Параметри iframe ({activeCount}/{totalCount} увімкнено)
-        </span>
-        <ChevronDown
-          className={`h-3.5 w-3.5 transition-transform ${controlsOpen ? 'rotate-180' : ''}`}
-        />
-      </button>
+      {onControlsToggle && (
+        <button
+          onClick={onControlsToggle}
+          className="text-muted-foreground flex w-full items-center justify-between py-1 text-xs"
+        >
+          <span>
+            Параметри iframe ({activeCount}/{totalCount} увімкнено)
+          </span>
+          <ChevronDown
+            className={`h-3.5 w-3.5 transition-transform ${controlsOpen ? 'rotate-180' : ''}`}
+          />
+        </button>
+      )}
       {controlsOpen && (
         <div className="text-muted-foreground mt-2 grid grid-cols-2 gap-x-6 gap-y-2.5 text-sm min-[400px]:grid-cols-3">
           {IFRAME_CONTROLS.flatMap(group =>
@@ -128,6 +133,8 @@ export default function EmbedConfigPanel({
   onConfigChange,
   activeTab,
   compact,
+  controlsOpen = true,
+  onControlsToggle,
 }: EmbedConfigPanelProps) {
   if (activeTab === 'oembed') {
     return (
@@ -152,9 +159,15 @@ export default function EmbedConfigPanel({
     );
   }
 
-  // iframe tab - compact (mobile)
   if (compact) {
-    return <CompactIframeControls config={config} onConfigChange={onConfigChange} />;
+    return (
+      <CompactIframeControls
+        config={config}
+        onConfigChange={onConfigChange}
+        controlsOpen={controlsOpen}
+        onControlsToggle={onControlsToggle}
+      />
+    );
   }
 
   return (
