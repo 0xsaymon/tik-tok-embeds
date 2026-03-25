@@ -161,23 +161,44 @@ export default function ResearchPage() {
           </code>
         </p>
 
-        <h4 className="mb-2 font-semibold">Доступні query-параметри:</h4>
+        <h4 className="mb-2 font-semibold">Доступні query-параметри (12):</h4>
         <div className="-mx-4 mb-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-          <table className="w-full min-w-[400px] border-collapse text-sm">
+          <table className="w-full min-w-[500px] border-collapse text-sm">
             <thead>
               <tr className="border-b">
                 <th className="px-2 py-2 text-left">Параметр</th>
-                <th className="px-2 py-2 text-left">Тип</th>
-                <th className="px-2 py-2 text-left">За замовчуванням</th>
+                <th className="px-2 py-2 text-left">За замовч.</th>
                 <th className="px-2 py-2 text-left">Опис</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b">
                 <td className="px-2 py-2">
+                  <code>autoplay</code>
+                </td>
+                <td className="px-2 py-2">0</td>
+                <td className="px-2 py-2">
+                  Автовідтворення (потребує muted=1 у більшості браузерів)
+                </td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
+                  <code>muted</code>
+                </td>
+                <td className="px-2 py-2">0</td>
+                <td className="px-2 py-2">Запуск без звуку</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
+                  <code>loop</code>
+                </td>
+                <td className="px-2 py-2">0</td>
+                <td className="px-2 py-2">Циклічне відтворення</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
                   <code>music_info</code>
                 </td>
-                <td className="px-2 py-2">boolean</td>
                 <td className="px-2 py-2">1</td>
                 <td className="px-2 py-2">Показувати інфо про музику</td>
               </tr>
@@ -185,17 +206,57 @@ export default function ResearchPage() {
                 <td className="px-2 py-2">
                   <code>description</code>
                 </td>
-                <td className="px-2 py-2">boolean</td>
                 <td className="px-2 py-2">1</td>
                 <td className="px-2 py-2">Показувати опис відео</td>
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-2">
+                  <code>rel</code>
+                </td>
+                <td className="px-2 py-2">1</td>
+                <td className="px-2 py-2">Показувати рекомендовані відео</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
                   <code>controls</code>
                 </td>
-                <td className="px-2 py-2">boolean</td>
+                <td className="px-2 py-2">1</td>
+                <td className="px-2 py-2">Показувати елементи управління</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
+                  <code>progress_bar</code>
+                </td>
+                <td className="px-2 py-2">1</td>
+                <td className="px-2 py-2">Показувати прогрес-бар</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
+                  <code>play_button</code>
+                </td>
+                <td className="px-2 py-2">1</td>
+                <td className="px-2 py-2">Показувати кнопку відтворення</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
+                  <code>volume_control</code>
+                </td>
                 <td className="px-2 py-2">1</td>
                 <td className="px-2 py-2">Показувати регулятор гучності</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
+                  <code>fullscreen_button</code>
+                </td>
+                <td className="px-2 py-2">1</td>
+                <td className="px-2 py-2">Показувати кнопку повного екрану</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
+                  <code>timestamp</code>
+                </td>
+                <td className="px-2 py-2">1</td>
+                <td className="px-2 py-2">Показувати час відтворення</td>
               </tr>
             </tbody>
           </table>
@@ -203,15 +264,17 @@ export default function ResearchPage() {
 
         <h4 className="mb-2 font-semibold">Переваги:</h4>
         <ul className="mb-4 list-disc pl-6">
-          <li>Більше контролю над контейнером</li>
-          <li>Явне задання розмірів</li>
-          <li>Деякі перемикачі елементів UI</li>
+          <li>12 параметрів кастомізації</li>
+          <li>Явне задання розмірів (width/height)</li>
+          <li>Можна приховати: опис, музику, рекомендації, прогрес-бар та інше</li>
+          <li>Autoplay з muted=1 працює у більшості браузерів</li>
+          <li>Циклічне відтворення (loop)</li>
         </ul>
 
         <h4 className="mb-2 font-semibold">Недоліки:</h4>
         <ul className="mb-6 list-disc pl-6">
-          <li>Все ще показує брендинг TikTok</li>
-          <li>Неможливо приховати метрики залученості</li>
+          <li>Все ще показує брендинг TikTok та інфо автора</li>
+          <li>Менш документований ніж oEmbed</li>
           <li>Та сама поведінка редиректу</li>
         </ul>
 
@@ -244,11 +307,17 @@ export default function ResearchPage() {
           <li>Шрифти</li>
         </ul>
 
-        <h3 className="mb-2 text-lg font-semibold text-red-600">Поведінка</h3>
+        <h3 className="mb-2 text-lg font-semibold text-yellow-600">
+          Поведінка (частково через Iframe Player)
+        </h3>
         <ul className="mb-6 list-disc pl-6">
-          <li>Автопрогравання (блокується політиками браузера)</li>
-          <li>Налаштування циклічного програвання</li>
-          <li>Гучність за замовчуванням</li>
+          <li>
+            Autoplay — <strong>працює</strong> в iframe з <code>muted=1</code> (політика браузерів)
+          </li>
+          <li>
+            Loop — <strong>працює</strong> в iframe з параметром <code>loop=1</code>
+          </li>
+          <li>Гучність за замовчуванням — не контролюється</li>
         </ul>
 
         <hr className="my-8" />
@@ -459,13 +528,13 @@ export default function ResearchPage() {
                 <td className="px-2 py-2">Прибрати інфо автора</td>
                 <td className="px-2 py-2">—</td>
                 <td className="px-2 py-2 text-red-600">Ні</td>
-                <td className="px-2 py-2">Overlay-хак (крихкий)</td>
+                <td className="px-2 py-2">Немає параметра в API</td>
               </tr>
               <tr className="border-b">
-                <td className="px-2 py-2">Прибрати метрики</td>
-                <td className="px-2 py-2 text-yellow-600">Частково</td>
+                <td className="px-2 py-2">Приховати елементи UI</td>
+                <td className="px-2 py-2 text-green-600">Iframe: 12 параметрів</td>
                 <td className="px-2 py-2">—</td>
-                <td className="px-2 py-2">Iframe-параметри (обмежено)</td>
+                <td className="px-2 py-2">Опис, музика, рекомендації, controls та ін.</td>
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-2">Вимкнути редиректи</td>

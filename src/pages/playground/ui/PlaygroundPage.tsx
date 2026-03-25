@@ -1,3 +1,4 @@
+import { X } from 'lucide-react';
 import { useMemo } from 'react';
 
 import type { TabValue } from '@/features/embed-playground';
@@ -11,7 +12,6 @@ import {
 } from '@/features/embed-playground';
 import { Button } from '@/shared/ui-kit/components/ui/button';
 import { Input } from '@/shared/ui-kit/components/ui/input';
-import { Switch } from '@/shared/ui-kit/components/ui/switch';
 import { Typography } from '@/shared/ui-kit/components/ui/typography';
 
 function TabButtons({
@@ -57,26 +57,36 @@ export default function PlaygroundPage() {
           Playground
         </Typography>
         <Typography variant="p" className="text-muted-foreground mb-6">
-          Test different embed configurations and verify customization capabilities.
+          Тестування конфігурацій TikTok embed та перевірка можливостей кастомізації.
         </Typography>
 
         <div className="mb-8 flex gap-2">
-          <Input
-            placeholder="Paste TikTok URL (e.g., https://www.tiktok.com/@username/video/1234567890)"
-            value={url}
-            onChange={e => setUrl(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handleUrlSubmit()}
-            className="flex-1"
-          />
-          <Button onClick={handleUrlSubmit}>Load Video</Button>
+          <div className="relative flex-1">
+            <Input
+              placeholder="Вставте TikTok URL (наприклад, https://www.tiktok.com/@username/video/1234567890)"
+              value={url}
+              onChange={e => setUrl(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleUrlSubmit()}
+              className={url ? 'pr-8' : ''}
+            />
+            {url && (
+              <button
+                onClick={() => setUrl('')}
+                className="text-muted-foreground hover:text-foreground absolute top-1/2 right-2 -translate-y-1/2"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+          <Button onClick={handleUrlSubmit}>Завантажити</Button>
         </div>
 
         <div className="grid min-h-0 flex-1 grid-cols-3 gap-8">
           <div className="min-h-0 space-y-6 overflow-auto rounded-lg border p-6">
             <Typography variant="h2" className="text-lg font-semibold">
-              Configuration
+              Конфігурація
             </Typography>
-            <EmbedConfigPanel config={config} onConfigChange={updateConfig} />
+            <EmbedConfigPanel config={config} onConfigChange={updateConfig} activeTab={activeTab} />
           </div>
 
           <div className="col-span-2 flex min-h-0 flex-col gap-4 overflow-auto">
@@ -107,13 +117,23 @@ export default function PlaygroundPage() {
 
           <div className="space-y-2 px-3 py-2">
             <div className="flex gap-2">
-              <Input
-                value={url}
-                onChange={e => setUrl(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && handleUrlSubmit()}
-                className="h-8 flex-1 text-xs"
-                placeholder="Video ID or URL"
-              />
+              <div className="relative flex-1">
+                <Input
+                  value={url}
+                  onChange={e => setUrl(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && handleUrlSubmit()}
+                  className={`h-8 text-xs ${url ? 'pr-7' : ''}`}
+                  placeholder="Video ID або URL"
+                />
+                {url && (
+                  <button
+                    onClick={() => setUrl('')}
+                    className="text-muted-foreground hover:text-foreground absolute top-1/2 right-1.5 -translate-y-1/2"
+                  >
+                    <X className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
               <Button
                 size="sm"
                 variant="outline"
@@ -124,32 +144,12 @@ export default function PlaygroundPage() {
               </Button>
             </div>
 
-            <div className="text-muted-foreground flex items-center justify-between text-xs">
-              <label className="flex items-center gap-1.5">
-                <Switch
-                  size="sm"
-                  checked={config.hideCaption}
-                  onCheckedChange={checked => updateConfig({ hideCaption: checked })}
-                />
-                Caption
-              </label>
-              <label className="flex items-center gap-1.5">
-                <Switch
-                  size="sm"
-                  checked={config.hideMusic}
-                  onCheckedChange={checked => updateConfig({ hideMusic: checked })}
-                />
-                Music
-              </label>
-              <label className="flex items-center gap-1.5">
-                <Switch
-                  size="sm"
-                  checked={config.controls}
-                  onCheckedChange={checked => updateConfig({ controls: checked })}
-                />
-                Controls
-              </label>
-            </div>
+            <EmbedConfigPanel
+              config={config}
+              onConfigChange={updateConfig}
+              activeTab={activeTab}
+              compact
+            />
           </div>
         </div>
       </div>
