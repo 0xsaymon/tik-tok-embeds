@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
+
 import { Typography } from '@/shared/ui-kit/components/ui/typography';
 
+import { reloadEmbedScript } from '../lib/embed-utils';
 import type { EmbedConfig, TabValue } from '../model/types';
 
 interface EmbedPreviewProps {
@@ -15,9 +18,19 @@ export default function EmbedPreview({
   iframeUrl,
   oEmbedHtml,
 }: EmbedPreviewProps) {
+  // Re-trigger embed.js when videoId changes or switching to oEmbed tab
+  useEffect(() => {
+    if (activeTab === 'oembed') {
+      // Small delay to let React mount the new blockquote first
+      const timer = setTimeout(reloadEmbedScript, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [activeTab, config.videoId]);
+
   if (activeTab === 'oembed') {
     return (
-      <div className="flex justify-center">
+      // key forces React to recreate the DOM element when videoId changes
+      <div key={config.videoId} className="flex justify-center">
         <blockquote
           className="tiktok-embed"
           cite={`https://www.tiktok.com/video/${config.videoId}`}
@@ -34,6 +47,7 @@ export default function EmbedPreview({
     return (
       <div className="flex justify-center">
         <iframe
+          key={iframeUrl}
           src={iframeUrl}
           width={config.width}
           height={config.height}

@@ -1,5 +1,14 @@
+import { useMemo } from 'react';
+
 import type { TabValue } from '@/features/embed-playground';
-import { EmbedConfigPanel, EmbedPreview, TABS, useEmbedConfig } from '@/features/embed-playground';
+import {
+  buildIframeUrl,
+  buildOEmbedHtml,
+  EmbedConfigPanel,
+  EmbedPreview,
+  TABS,
+  useEmbedPlayground,
+} from '@/features/embed-playground';
 import { Button } from '@/shared/ui-kit/components/ui/button';
 import { Input } from '@/shared/ui-kit/components/ui/input';
 import { Switch } from '@/shared/ui-kit/components/ui/switch';
@@ -34,17 +43,11 @@ function TabButtons({
 }
 
 export default function PlaygroundPage() {
-  const {
-    config,
-    updateConfig,
-    url,
-    setUrl,
-    activeTab,
-    setActiveTab,
-    iframeUrl,
-    oEmbedHtml,
-    handleUrlSubmit,
-  } = useEmbedConfig();
+  const { config, updateConfig, url, setUrl, activeTab, setActiveTab, handleUrlSubmit } =
+    useEmbedPlayground();
+
+  const iframeUrl = useMemo(() => buildIframeUrl(config), [config]);
+  const oEmbedHtml = useMemo(() => buildOEmbedHtml(config), [config]);
 
   return (
     <main className="flex h-[calc(100dvh-57px-4rem)] flex-col overflow-hidden md:h-[calc(100dvh-57px)] md:p-6 lg:p-8">
