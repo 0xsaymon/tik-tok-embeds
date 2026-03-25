@@ -25,14 +25,35 @@ interface EmbedGridState {
   setGlobalSettingsOpen: (open: boolean) => void;
 }
 
-let nextId = 1;
+const DEFAULT_URLS = [
+  'https://www.tiktok.com/@queefquack123/video/7543789467740458271',
+  'https://www.tiktok.com/@marykatenoashley/video/7541605713617882399',
+  'https://www.tiktok.com/@dudevaeh/video/7573311210620259615',
+  'https://www.tiktok.com/@samhooper_/video/7581608398815284498',
+  'https://www.tiktok.com/@camimiminini/video/7579295333071473927',
+  'https://www.tiktok.com/@71cent/video/7573904830461234487',
+  'https://www.tiktok.com/@spaghetillie/video/7583832764869397782',
+  'https://www.tiktok.com/@suprfrikncoolswagunicorn/video/7582012756581305608',
+];
+
+function videosFromUrls(urls: string[]): GridVideo[] {
+  let id = 0;
+  return urls
+    .map(url => {
+      const videoId = parseTikTokUrl(url);
+      return videoId ? { id: String(++id), videoId, url } : null;
+    })
+    .filter(Boolean) as GridVideo[];
+}
+
+let nextId = 100;
 
 export const useEmbedGrid = create<EmbedGridState>()(
   persist(
     (set, get) => ({
-      videos: [],
+      videos: videosFromUrls(DEFAULT_URLS),
       globalConfig: DEFAULT_IFRAME_CONFIG,
-      urlInput: '',
+      urlInput: DEFAULT_URLS.join('\n'),
       settingsOpenId: null,
       globalSettingsOpen: false,
 
