@@ -1,3 +1,6 @@
+import { ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+
 import { Input } from '@/shared/ui-kit/components/ui/input';
 import { Label } from '@/shared/ui-kit/components/ui/label';
 import { Switch } from '@/shared/ui-kit/components/ui/switch';
@@ -74,6 +77,50 @@ const IFRAME_CONTROLS: {
   },
 ];
 
+function CompactIframeControls({
+  config,
+  onConfigChange,
+}: {
+  config: EmbedConfig;
+  onConfigChange: (partial: Partial<EmbedConfig>) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const activeCount = IFRAME_CONTROLS.flatMap(g => g.items).filter(
+    i => config[i.key] as boolean,
+  ).length;
+  const totalCount = IFRAME_CONTROLS.flatMap(g => g.items).length;
+
+  return (
+    <div>
+      <button
+        onClick={() => setOpen(v => !v)}
+        className="text-muted-foreground flex w-full items-center justify-between text-xs"
+      >
+        <span>
+          Параметри iframe ({activeCount}/{totalCount} увімкнено)
+        </span>
+        <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+      {open && (
+        <div className="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
+          {IFRAME_CONTROLS.flatMap(group =>
+            group.items.map(item => (
+              <SwitchRow
+                key={item.id}
+                id={`m-${item.id}`}
+                label={item.label}
+                checked={config[item.key] as boolean}
+                onChange={checked => onConfigChange({ [item.key]: checked })}
+                compact
+              />
+            )),
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function EmbedConfigPanel({
   config,
   onConfigChange,
@@ -105,24 +152,9 @@ export default function EmbedConfigPanel({
     );
   }
 
-  // iframe tab
+  // iframe tab - compact (mobile)
   if (compact) {
-    return (
-      <div className="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
-        {IFRAME_CONTROLS.flatMap(group =>
-          group.items.map(item => (
-            <SwitchRow
-              key={item.id}
-              id={`m-${item.id}`}
-              label={item.label}
-              checked={config[item.key] as boolean}
-              onChange={checked => onConfigChange({ [item.key]: checked })}
-              compact
-            />
-          )),
-        )}
-      </div>
-    );
+    return <CompactIframeControls config={config} onConfigChange={onConfigChange} />;
   }
 
   return (

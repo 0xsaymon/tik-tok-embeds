@@ -45,14 +45,18 @@ export default function EmbedPreview({
 
   if (activeTab === 'iframe') {
     return (
-      <div className="flex justify-center">
+      <div className="flex h-full items-start justify-center">
         <iframe
           key={iframeUrl}
           src={iframeUrl}
+          allow="fullscreen"
+          className="h-full w-full rounded-lg md:h-auto md:w-auto"
+          style={{
+            maxWidth: config.width,
+            aspectRatio: `${config.width} / ${config.height}`,
+          }}
           width={config.width}
           height={config.height}
-          allow="fullscreen"
-          className="rounded-lg"
           title="TikTok Video"
         />
       </div>
