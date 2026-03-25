@@ -1,38 +1,52 @@
-import { useEffect } from 'react';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 
+import AlternativesPage from '@/pages/AlternativesPage';
+import Home from '@/pages/Home';
+import ResearchPage from '@/pages/ResearchPage';
 import { Toaster } from '@/shared/ui-kit/components/ui/sonner';
-import { ThemeProvider } from '@/shared/ui-kit/theme';
+import { ModeToggle, ThemeProvider } from '@/shared/ui-kit/theme';
 
-import AppLayout from './layouts/app-layout';
-
-const TIKTOK_VIDEO_ID = '7613863332826729761';
-
-export default function App() {
-  useEffect(() => {
-    const existing = document.querySelector('script[src*="tiktok.com/embed.js"]');
-    if (existing) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://www.tiktok.com/embed.js';
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
+function Navigation() {
+  const navItemClass = ({ isActive }: { isActive: boolean }) =>
+    `text-sm transition-colors ${isActive ? 'text-foreground font-medium' : 'text-muted-foreground hover:text-foreground'}`;
 
   return (
-    <ThemeProvider>
-      <AppLayout>
-        <div className="flex flex-1 items-center justify-center p-8">
-          <blockquote
-            className="tiktok-embed"
-            cite={`https://www.tiktok.com/video/${TIKTOK_VIDEO_ID}`}
-            data-video-id={TIKTOK_VIDEO_ID}
-            style={{ maxWidth: 605, minWidth: 325 }}
-          >
-            <section />
-          </blockquote>
+    <nav className="bg-background/95 supports-[backdrop-filter]:bg-background/60 border-b px-4 py-3 backdrop-blur">
+      <div className="relative flex items-center justify-between">
+        <NavLink to="/" end className="text-lg font-semibold hover:opacity-80">
+          TikTok Embeds
+        </NavLink>
+
+        <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-5">
+          <NavLink to="/" end className={navItemClass}>
+            Playground
+          </NavLink>
+          <NavLink to="/research" className={navItemClass}>
+            Research
+          </NavLink>
+          <NavLink to="/alternatives" className={navItemClass}>
+            Alternatives
+          </NavLink>
         </div>
-      </AppLayout>
-      <Toaster />
-    </ThemeProvider>
+
+        <ModeToggle />
+      </div>
+    </nav>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ThemeProvider>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/research" element={<ResearchPage />} />
+          <Route path="/alternatives" element={<AlternativesPage />} />
+        </Routes>
+        <Toaster />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
