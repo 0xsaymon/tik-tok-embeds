@@ -1,0 +1,7 @@
+dist/
+pnpm-lock.yaml
+
+# shadcn-generated files — do not format
+src/shared/ui-kit/lib
+src/shared/ui-kit/hooks
+src/shared/ui-kit/components
