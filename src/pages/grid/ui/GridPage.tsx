@@ -90,7 +90,7 @@ export default function GridPage() {
           )}
         </div>
         <Button onClick={applyUrls} className="shrink-0">
-          Застосувати
+          Додати
         </Button>
       </div>
 
