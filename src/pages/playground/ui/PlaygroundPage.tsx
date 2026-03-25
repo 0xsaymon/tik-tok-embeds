@@ -104,10 +104,7 @@ export default function PlaygroundPage() {
         </div>
 
         <div className="grid min-h-0 flex-1 grid-cols-3 gap-8">
-          <div className="min-h-0 space-y-6 overflow-auto rounded-lg border p-6">
-            <Typography variant="h2" className="text-lg font-semibold">
-              Конфігурація
-            </Typography>
+          <div className="min-h-0 overflow-auto rounded-lg border p-6">
             <EmbedConfigPanel config={config} onConfigChange={updateConfig} activeTab={activeTab} />
           </div>
 
