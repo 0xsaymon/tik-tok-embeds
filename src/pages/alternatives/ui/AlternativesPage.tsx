@@ -126,7 +126,7 @@ function StatusBadge({ status }: { status: Alternative['status'] }) {
 
 export default function AlternativesPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <Typography variant="h1" className="mb-2 text-3xl font-bold">
         Альтернативи TikTok Embed
       </Typography>

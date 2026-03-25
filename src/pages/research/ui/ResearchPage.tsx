@@ -1,6 +1,6 @@
 export default function ResearchPage() {
   return (
-    <div className="mx-auto max-w-4xl overflow-x-hidden px-4 py-8 sm:px-6">
+    <div className="mx-auto max-w-7xl overflow-x-hidden px-4 py-8 sm:px-6 lg:px-8">
       <article className="prose prose-slate dark:prose-invert max-w-none min-w-0">
         <h1 className="mb-6 text-2xl font-bold sm:text-3xl">Результати дослідження TikTok Embed</h1>
 

@@ -56,7 +56,7 @@ export default function GridPage() {
   ).length;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <Typography variant="h1" className="mb-2 text-2xl font-bold">
         Сітка
       </Typography>

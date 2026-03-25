@@ -54,7 +54,7 @@ export default function PlaygroundPage() {
   const iframeUrl = useMemo(() => buildIframeUrl(config), [config]);
 
   return (
-    <main className="flex h-[calc(100dvh-57px-4rem)] flex-col overflow-hidden md:h-[calc(100dvh-57px)] md:p-6 lg:p-8">
+    <main className="flex h-[calc(100dvh-57px-4rem)] flex-col overflow-hidden md:mx-auto md:h-[calc(100dvh-57px)] md:w-full md:max-w-7xl md:px-6 md:py-6 lg:px-8">
       {/* ===== DESKTOP ===== */}
       <div className="hidden h-full flex-col md:flex">
         <Typography variant="h1" className="mb-2 text-2xl font-bold">
