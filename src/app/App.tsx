@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/shared/ui-kit/theme';
 
 import AppLayout from './layouts/app-layout';
 
-const TIKTOK_VIDEO_ID = '7469092959268498718';
+const TIKTOK_VIDEO_ID = '7613863332826729761';
 
 export default function App() {
   useEffect(() => {
