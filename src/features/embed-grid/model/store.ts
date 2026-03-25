@@ -12,6 +12,7 @@ interface EmbedGridState {
   videos: GridVideo[];
   globalConfig: IframeConfig;
   urlInput: string;
+  columns: number;
   settingsOpenId: string | null;
   globalSettingsOpen: boolean;
 
@@ -21,6 +22,7 @@ interface EmbedGridState {
   updateVideoOverrides: (id: string, overrides: Partial<IframeConfig>) => void;
   clearVideoOverrides: (id: string) => void;
   updateGlobalConfig: (partial: Partial<IframeConfig>) => void;
+  setColumns: (columns: number) => void;
   setSettingsOpenId: (id: string | null) => void;
   setGlobalSettingsOpen: (open: boolean) => void;
 }
@@ -54,6 +56,7 @@ export const useEmbedGrid = create<EmbedGridState>()(
       videos: videosFromUrls(DEFAULT_URLS),
       globalConfig: DEFAULT_IFRAME_CONFIG,
       urlInput: DEFAULT_URLS.join('\n'),
+      columns: 4,
       settingsOpenId: null,
       globalSettingsOpen: false,
 
@@ -94,6 +97,7 @@ export const useEmbedGrid = create<EmbedGridState>()(
       updateGlobalConfig: partial =>
         set(state => ({ globalConfig: { ...state.globalConfig, ...partial } })),
 
+      setColumns: columns => set({ columns }),
       setSettingsOpenId: settingsOpenId => set({ settingsOpenId }),
       setGlobalSettingsOpen: globalSettingsOpen => set({ globalSettingsOpen }),
     }),
@@ -103,6 +107,7 @@ export const useEmbedGrid = create<EmbedGridState>()(
         videos: state.videos,
         globalConfig: state.globalConfig,
         urlInput: state.urlInput,
+        columns: state.columns,
       }),
     },
   ),

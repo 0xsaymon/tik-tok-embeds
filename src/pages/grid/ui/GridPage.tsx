@@ -1,4 +1,4 @@
-import { ChevronDown, X } from 'lucide-react';
+import { ChevronDown, Columns3, X } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { useEmbedGrid } from '@/features/embed-grid';
@@ -29,10 +29,12 @@ export default function GridPage() {
     videos,
     globalConfig,
     urlInput,
+    columns,
     globalSettingsOpen,
     setUrlInput,
     applyUrls,
     updateGlobalConfig,
+    setColumns,
     setGlobalSettingsOpen,
   } = useEmbedGrid();
 
@@ -122,13 +124,35 @@ export default function GridPage() {
         )}
       </div>
 
-      {/* Grid */}
+      {/* Column selector + Grid */}
+      <div className="mb-4 flex items-center gap-2">
+        <Columns3 className="text-muted-foreground h-4 w-4" />
+        <div className="flex gap-1">
+          {[1, 2, 3, 4].map(n => (
+            <button
+              key={n}
+              onClick={() => setColumns(n)}
+              className={`h-7 w-7 rounded text-xs font-medium transition-colors ${
+                columns === n
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {n}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {videos.length === 0 ? (
         <div className="text-muted-foreground flex h-64 items-center justify-center rounded-xl border border-dashed text-sm">
-          Вставте TikTok URL вище та натисніть &quot;Застосувати&quot;
+          Вставте TikTok URL вище та натисніть &quot;Додати&quot;
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div
+          className="grid gap-4"
+          style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+        >
           {mergedConfigs.map(({ video, config }) => (
             <GridCell key={video.id} video={video} mergedConfig={config} />
           ))}
