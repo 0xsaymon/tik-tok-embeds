@@ -51,28 +51,28 @@ const IFRAME_CONTROLS: {
   {
     group: 'Відтворення',
     items: [
-      { id: 'autoplay', label: 'Autoplay', key: 'autoplay' },
-      { id: 'muted', label: 'Muted', key: 'muted' },
-      { id: 'loop', label: 'Loop', key: 'loop' },
+      { id: 'autoplay', label: 'Автовідтворення', key: 'autoplay' },
+      { id: 'muted', label: 'Без звуку', key: 'muted' },
+      { id: 'loop', label: 'Цикл', key: 'loop' },
     ],
   },
   {
     group: 'Інтерфейс',
     items: [
-      { id: 'controls', label: 'Controls', key: 'controls' },
-      { id: 'progress-bar', label: 'Progress Bar', key: 'progressBar' },
-      { id: 'play-button', label: 'Play Button', key: 'playButton' },
-      { id: 'volume-control', label: 'Volume', key: 'volumeControl' },
-      { id: 'fullscreen-button', label: 'Fullscreen', key: 'fullscreenButton' },
+      { id: 'controls', label: 'Управління', key: 'controls' },
+      { id: 'progress-bar', label: 'Прогрес-бар', key: 'progressBar' },
+      { id: 'play-button', label: 'Кнопка Play', key: 'playButton' },
+      { id: 'volume-control', label: 'Гучність', key: 'volumeControl' },
+      { id: 'fullscreen-button', label: 'Повний екран', key: 'fullscreenButton' },
     ],
   },
   {
     group: 'Контент',
     items: [
-      { id: 'music-info', label: 'Music Info', key: 'musicInfo' },
-      { id: 'description', label: 'Description', key: 'description' },
-      { id: 'rel', label: 'Related Videos', key: 'rel' },
-      { id: 'timestamp', label: 'Timestamp', key: 'timestamp' },
+      { id: 'music-info', label: 'Інфо про музику', key: 'musicInfo' },
+      { id: 'description', label: 'Опис', key: 'description' },
+      { id: 'rel', label: 'Рекомендовані', key: 'rel' },
+      { id: 'timestamp', label: 'Час', key: 'timestamp' },
     ],
   },
 ];
@@ -140,7 +140,7 @@ export default function EmbedConfigPanel({
     return (
       <div className={compact ? 'flex items-center gap-3' : 'space-y-4'}>
         <div className={compact ? 'flex items-center gap-2' : 'space-y-2'}>
-          {!compact && <Label>Max Width (px)</Label>}
+          {!compact && <Label>Макс. ширина (px)</Label>}
           <Input
             type="number"
             value={config.width}
@@ -174,7 +174,7 @@ export default function EmbedConfigPanel({
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label>Width (px)</Label>
+          <Label>Ширина (px)</Label>
           <Input
             type="number"
             value={config.width}
@@ -182,7 +182,7 @@ export default function EmbedConfigPanel({
           />
         </div>
         <div className="space-y-2">
-          <Label>Height (px)</Label>
+          <Label>Висота (px)</Label>
           <Input
             type="number"
             value={config.height}

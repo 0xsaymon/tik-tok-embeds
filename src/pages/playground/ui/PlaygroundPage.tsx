@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { useEmbedPlayground } from '@/features/embed-playground';
 import type { TabValue } from '@/shared/lib/tiktok';
@@ -51,6 +52,23 @@ export default function PlaygroundPage() {
     handleUrlSubmit,
   } = useEmbedPlayground();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Sync ?tab= query param → store on mount
+  useEffect(() => {
+    const tabParam = searchParams.get('tab') as TabValue | null;
+    if (tabParam && (tabParam === 'iframe' || tabParam === 'oembed') && tabParam !== activeTab) {
+      setActiveTab(tabParam);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Sync store → URL when tab changes
+  const handleTabChange = (tab: TabValue) => {
+    setActiveTab(tab);
+    setSearchParams({ tab }, { replace: true });
+  };
+
   const iframeUrl = useMemo(() => buildIframeUrl(config), [config]);
 
   return (
@@ -94,7 +112,7 @@ export default function PlaygroundPage() {
           </div>
 
           <div className="col-span-2 flex min-h-0 flex-col gap-4 overflow-auto">
-            <TabButtons activeTab={activeTab} onTabChange={setActiveTab} />
+            <TabButtons activeTab={activeTab} onTabChange={handleTabChange} />
             <EmbedPreview activeTab={activeTab} config={config} iframeUrl={iframeUrl} />
           </div>
         </div>
@@ -107,7 +125,7 @@ export default function PlaygroundPage() {
         </div>
 
         <div className="bg-background shrink-0 border-t">
-          <TabButtons activeTab={activeTab} onTabChange={setActiveTab} className="border-b" />
+          <TabButtons activeTab={activeTab} onTabChange={handleTabChange} className="border-b" />
 
           <div className="space-y-2 px-3 py-2">
             <div className="flex gap-2">
@@ -134,7 +152,7 @@ export default function PlaygroundPage() {
                 onClick={handleUrlSubmit}
                 className="h-8 px-3 text-xs"
               >
-                Load
+                Завантажити
               </Button>
             </div>
 

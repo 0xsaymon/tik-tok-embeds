@@ -10,18 +10,18 @@ import { Typography } from '@/shared/ui-kit/components/ui/typography';
 import GridCell from './GridCell';
 
 const TOGGLE_ITEMS: { label: string; key: keyof EmbedConfig }[] = [
-  { label: 'Autoplay', key: 'autoplay' },
-  { label: 'Muted', key: 'muted' },
-  { label: 'Loop', key: 'loop' },
-  { label: 'Controls', key: 'controls' },
-  { label: 'Progress Bar', key: 'progressBar' },
-  { label: 'Play Button', key: 'playButton' },
-  { label: 'Volume', key: 'volumeControl' },
-  { label: 'Fullscreen', key: 'fullscreenButton' },
-  { label: 'Music Info', key: 'musicInfo' },
-  { label: 'Description', key: 'description' },
-  { label: 'Related', key: 'rel' },
-  { label: 'Timestamp', key: 'timestamp' },
+  { label: 'Автовідтворення', key: 'autoplay' },
+  { label: 'Без звуку', key: 'muted' },
+  { label: 'Цикл', key: 'loop' },
+  { label: 'Управління', key: 'controls' },
+  { label: 'Прогрес-бар', key: 'progressBar' },
+  { label: 'Кнопка Play', key: 'playButton' },
+  { label: 'Гучність', key: 'volumeControl' },
+  { label: 'Повний екран', key: 'fullscreenButton' },
+  { label: 'Інфо про музику', key: 'musicInfo' },
+  { label: 'Опис', key: 'description' },
+  { label: 'Рекомендовані', key: 'rel' },
+  { label: 'Час', key: 'timestamp' },
 ];
 
 export default function GridPage() {

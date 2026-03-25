@@ -1,4 +1,5 @@
-import { AlertCircle, CheckCircle2, XCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ExternalLink, XCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import { Badge } from '@/shared/ui-kit/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui-kit/components/ui/card';
@@ -11,6 +12,7 @@ interface Alternative {
   pros: string[];
   cons: string[];
   verdict: string;
+  link?: { to: string; label: string };
 }
 
 const alternatives: Alternative[] = [
@@ -86,6 +88,7 @@ const alternatives: Alternative[] = [
       'Потенційно менш стабільний API',
     ],
     verdict: '✅ Рекомендовано для Zeely — найкращий баланс кастомізації та стабільності',
+    link: { to: '/?tab=iframe', label: 'Відкрити в Пісочниці' },
   },
   {
     name: 'Стандартний oEmbed',
@@ -105,6 +108,7 @@ const alternatives: Alternative[] = [
       'Редирект на TikTok при кліку',
     ],
     verdict: '⚠️ Підходить для простого превью, але iframe player дає більше контролю',
+    link: { to: '/?tab=oembed', label: 'Відкрити в Пісочниці' },
   },
 ];
 
@@ -189,6 +193,15 @@ export default function AlternativesPage() {
               <Typography variant="p" className="text-muted-foreground mt-1">
                 {alt.verdict}
               </Typography>
+              {alt.link && (
+                <Link
+                  to={alt.link.to}
+                  className="mt-2 inline-flex items-center gap-1 text-sm text-blue-500 hover:underline"
+                >
+                  {alt.link.label}
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
+              )}
             </div>
           </Card>
         ))}
@@ -205,6 +218,13 @@ export default function AlternativesPage() {
                   Використовувати Direct Iframe Player (/player/v1/) з оптимальними параметрами
                   (rel=0, description=0) для чистого вигляду превью.
                 </p>
+                <Link
+                  to="/grid"
+                  className="mt-2 inline-flex items-center gap-1 text-sm text-blue-500 hover:underline"
+                >
+                  Переглянути сітку
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
               </div>
               <div>
                 <h4 className="font-semibold">Фаза 2 (Покращення)</h4>
