@@ -1,4 +1,4 @@
-export { buildIframeUrl, buildOEmbedHtml } from './lib/embed-utils';
+export { buildIframeUrl } from './lib/embed-utils';
 export { TABS } from './model/constants';
 export { useEmbedPlayground } from './model/store';
 export type { EmbedConfig, TabValue } from './model/types';

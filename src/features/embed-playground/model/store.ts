@@ -36,7 +36,7 @@ export const useEmbedPlayground = create<EmbedPlaygroundState>()(
         timestamp: true,
       },
       url: '',
-      activeTab: 'oembed' as TabValue,
+      activeTab: 'iframe' as TabValue,
 
       updateConfig: partial => set(state => ({ config: { ...state.config, ...partial } })),
       setUrl: url => set({ url }),

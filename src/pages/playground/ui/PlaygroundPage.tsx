@@ -4,7 +4,6 @@ import { useMemo } from 'react';
 import type { TabValue } from '@/features/embed-playground';
 import {
   buildIframeUrl,
-  buildOEmbedHtml,
   EmbedConfigPanel,
   EmbedPreview,
   TABS,
@@ -47,7 +46,6 @@ export default function PlaygroundPage() {
     useEmbedPlayground();
 
   const iframeUrl = useMemo(() => buildIframeUrl(config), [config]);
-  const oEmbedHtml = useMemo(() => buildOEmbedHtml(config), [config]);
 
   return (
     <main className="flex h-[calc(100dvh-57px-4rem)] flex-col overflow-hidden md:h-[calc(100dvh-57px)] md:p-6 lg:p-8">
@@ -91,12 +89,7 @@ export default function PlaygroundPage() {
 
           <div className="col-span-2 flex min-h-0 flex-col gap-4 overflow-auto">
             <TabButtons activeTab={activeTab} onTabChange={setActiveTab} />
-            <EmbedPreview
-              activeTab={activeTab}
-              config={config}
-              iframeUrl={iframeUrl}
-              oEmbedHtml={oEmbedHtml}
-            />
+            <EmbedPreview activeTab={activeTab} config={config} iframeUrl={iframeUrl} />
           </div>
         </div>
       </div>
@@ -104,12 +97,7 @@ export default function PlaygroundPage() {
       {/* ===== MOBILE ===== */}
       <div className="flex min-h-0 flex-1 flex-col md:hidden">
         <div className="min-h-0 flex-1 overflow-auto">
-          <EmbedPreview
-            activeTab={activeTab}
-            config={config}
-            iframeUrl={iframeUrl}
-            oEmbedHtml={oEmbedHtml}
-          />
+          <EmbedPreview activeTab={activeTab} config={config} iframeUrl={iframeUrl} />
         </div>
 
         <div className="bg-background shrink-0 border-t">

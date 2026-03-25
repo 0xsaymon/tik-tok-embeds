@@ -17,4 +17,4 @@ export interface EmbedConfig {
   timestamp: boolean;
 }
 
-export type TabValue = 'oembed' | 'iframe' | 'code';
+export type TabValue = 'iframe' | 'oembed';

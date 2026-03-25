@@ -127,8 +127,6 @@ export default function EmbedConfigPanel({
   activeTab,
   compact,
 }: EmbedConfigPanelProps) {
-  if (activeTab === 'code') return null;
-
   if (activeTab === 'oembed') {
     return (
       <div className={compact ? 'flex items-center gap-3' : 'space-y-4'}>
