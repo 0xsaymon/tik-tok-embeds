@@ -540,7 +540,7 @@ export default function ResearchPage() {
             to="/grid"
             className="rounded-lg border p-4 transition-colors hover:border-blue-400 hover:bg-blue-50/50 sm:col-span-2 dark:hover:bg-blue-900/20"
           >
-            <h4 className="font-semibold">Сітка</h4>
+            <h4 className="font-semibold">Сітка (Iframe)</h4>
             <p className="text-muted-foreground text-sm">
               Кілька відео одночасно з глобальними та per-video налаштуваннями
             </p>
@@ -623,9 +623,11 @@ export default function ResearchPage() {
           <p>
             TikTok embed створений для залучення трафіку на TikTok. Повна кастомізація UI обмежена,
             але <strong>Direct Iframe Player (/player/v1/)</strong> дає 10 підтверджених параметрів
-            для налаштування відображення. Рекомендований підхід для Zeely — використовувати iframe
-            player з оптимальним набором параметрів (rel=0, description=0) для чистого вигляду
-            превью.
+            для налаштування відображення. Рекомендований підхід для Zeely — використовувати{' '}
+            <Link to="/?tab=iframe" className="text-blue-600 underline dark:text-blue-400">
+              iframe player
+            </Link>{' '}
+            з оптимальним набором параметрів (rel=0, description=0) для чистого вигляду превью.
           </p>
         </div>
       </article>
