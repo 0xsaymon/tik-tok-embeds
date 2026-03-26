@@ -1,6 +1,6 @@
 import { X } from 'lucide-react';
 import { useEffect, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { useEmbedPlayground } from '@/features/embed-playground';
 import type { TabValue } from '@/shared/lib/tiktok';
@@ -77,7 +77,10 @@ export default function PlaygroundPage() {
           Playground
         </Typography>
         <Typography variant="p" className="text-muted-foreground mb-6">
-          Тестування конфігурацій TikTok embed та перевірка можливостей кастомізації.
+          Тестування конфігурацій TikTok embed та перевірка можливостей кастомізації.{' '}
+          <Link to={`/research?tab=${activeTab}`} className="text-blue-500 hover:underline">
+            Дослідження →
+          </Link>
         </Typography>
 
         <div className="grid min-h-0 flex-1 grid-cols-3 gap-8">

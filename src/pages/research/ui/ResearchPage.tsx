@@ -1,7 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
 export default function ResearchPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [methodTab, setMethodTab] = useState<'iframe' | 'oembed'>('iframe');
+  const tabsRef = useRef<HTMLDivElement>(null);
+
+  // Sync ?tab= from URL on mount
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    if (tabParam === 'iframe' || tabParam === 'oembed') {
+      setMethodTab(tabParam);
+      // Scroll to tabs section after render
+      setTimeout(() => {
+        tabsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleTabChange = (tab: 'iframe' | 'oembed') => {
+    setMethodTab(tab);
+    setSearchParams({ tab }, { replace: true });
+  };
 
   return (
     <div className="mx-auto max-w-7xl overflow-x-hidden px-4 py-8 sm:px-6 lg:px-8">
@@ -114,9 +135,9 @@ export default function ResearchPage() {
         <h2 className="mb-6 text-2xl font-semibold">Технічні деталі реалізації</h2>
 
         {/* Method tabs */}
-        <div className="mb-6 flex border-b">
+        <div ref={tabsRef} className="mb-6 flex scroll-mt-16 border-b">
           <button
-            onClick={() => setMethodTab('iframe')}
+            onClick={() => handleTabChange('iframe')}
             className={`px-4 py-2 text-sm font-medium transition-colors ${
               methodTab === 'iframe'
                 ? 'border-primary text-foreground border-b-2'
@@ -126,7 +147,7 @@ export default function ResearchPage() {
             Прямий Iframe (рекомендований)
           </button>
           <button
-            onClick={() => setMethodTab('oembed')}
+            onClick={() => handleTabChange('oembed')}
             className={`px-4 py-2 text-sm font-medium transition-colors ${
               methodTab === 'oembed'
                 ? 'border-primary text-foreground border-b-2'
@@ -139,6 +160,12 @@ export default function ResearchPage() {
 
         {methodTab === 'oembed' && (
           <>
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-xl font-semibold">oEmbed API</h3>
+              <Link to="/?tab=oembed" className="text-sm text-blue-500 hover:underline">
+                Спробувати в Пісочниці →
+              </Link>
+            </div>
             <p className="mb-2">
               <strong>Endpoint:</strong>{' '}
               <code className="bg-muted rounded px-2 py-1 text-xs sm:text-sm">
@@ -192,7 +219,12 @@ export default function ResearchPage() {
 
         {methodTab === 'iframe' && (
           <>
-            <h3 className="mb-3 text-xl font-semibold">Прямий Iframe Player</h3>
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-xl font-semibold">Прямий Iframe Player</h3>
+              <Link to="/?tab=iframe" className="text-sm text-blue-500 hover:underline">
+                Спробувати в Пісочниці →
+              </Link>
+            </div>
             <p className="mb-2">
               <strong>Формат URL:</strong>{' '}
               <code className="bg-muted rounded px-2 py-1 text-xs sm:text-sm">
