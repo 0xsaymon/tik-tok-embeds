@@ -162,24 +162,6 @@ export default function EmbedConfigPanel({
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label>Ширина (px)</Label>
-          <Input
-            type="number"
-            value={config.width}
-            onChange={e => onConfigChange({ width: parseInt(e.target.value) })}
-          />
-        </div>
-        <div className="space-y-2">
-          <Label>Висота (px)</Label>
-          <Input
-            type="number"
-            value={config.height}
-            onChange={e => onConfigChange({ height: parseInt(e.target.value) })}
-          />
-        </div>
-      </div>
       {IFRAME_CONTROLS.map(group => (
         <div key={group.group} className="space-y-3 pt-2">
           <Typography
