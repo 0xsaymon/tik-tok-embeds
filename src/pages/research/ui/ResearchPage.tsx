@@ -1,3 +1,4 @@
+import { Link2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
@@ -524,7 +525,10 @@ export default function ResearchPage() {
             to="/?tab=iframe"
             className="rounded-lg border p-4 transition-colors hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/20"
           >
-            <h4 className="font-semibold">Пісочниця (Iframe)</h4>
+            <h4 className="flex items-center gap-1.5 font-semibold">
+              <Link2 className="h-4 w-4 shrink-0" />
+              Пісочниця (Iframe)
+            </h4>
             <p className="text-muted-foreground text-sm">
               Інтерактивне тестування параметрів одного відео
             </p>
@@ -533,14 +537,20 @@ export default function ResearchPage() {
             to="/?tab=oembed"
             className="rounded-lg border p-4 transition-colors hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/20"
           >
-            <h4 className="font-semibold">Пісочниця (oEmbed)</h4>
+            <h4 className="flex items-center gap-1.5 font-semibold">
+              <Link2 className="h-4 w-4 shrink-0" />
+              Пісочниця (oEmbed)
+            </h4>
             <p className="text-muted-foreground text-sm">Стандартний TikTok embed з blockquote</p>
           </Link>
           <Link
             to="/grid"
             className="rounded-lg border p-4 transition-colors hover:border-blue-400 hover:bg-blue-50/50 sm:col-span-2 dark:hover:bg-blue-900/20"
           >
-            <h4 className="font-semibold">Сітка (Iframe)</h4>
+            <h4 className="flex items-center gap-1.5 font-semibold">
+              <Link2 className="h-4 w-4 shrink-0" />
+              Сітка (Iframe)
+            </h4>
             <p className="text-muted-foreground text-sm">
               Кілька відео одночасно з глобальними та per-video налаштуваннями
             </p>
@@ -548,7 +558,7 @@ export default function ResearchPage() {
         </div>
 
         <h3 className="mb-3 text-lg font-semibold">Тестові відео</h3>
-        <div className="mb-8 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
             { id: '7620887262770760982', author: '@_.thys._' },
             { id: '7543789467740458271', author: '@queefquack123' },
@@ -564,10 +574,19 @@ export default function ResearchPage() {
               href={`https://www.tiktok.com/player/v1/${v.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-muted hover:bg-muted/70 truncate rounded-lg px-3 py-2 text-xs transition-colors"
+              className="group overflow-hidden rounded-xl border transition-colors hover:border-blue-400"
             >
-              <span className="block truncate font-mono">{v.id}</span>
-              <span className="text-muted-foreground block truncate">{v.author}</span>
+              <div className="bg-muted h-44">
+                <iframe
+                  src={`https://www.tiktok.com/player/v1/${v.id}?controls=0&rel=0&music_info=0&description=0`}
+                  className="pointer-events-none h-full w-full border-none"
+                  loading="lazy"
+                  title={`TikTok ${v.author}`}
+                />
+              </div>
+              <div className="px-3 py-2.5">
+                <span className="text-muted-foreground text-sm">{v.author}</span>
+              </div>
             </a>
           ))}
         </div>
