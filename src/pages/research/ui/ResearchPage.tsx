@@ -1,4 +1,8 @@
+import { useState } from 'react';
+
 export default function ResearchPage() {
+  const [methodTab, setMethodTab] = useState<'iframe' | 'oembed'>('iframe');
+
   return (
     <div className="mx-auto max-w-7xl overflow-x-hidden px-4 py-8 sm:px-6 lg:px-8">
       <article className="prose prose-slate dark:prose-invert max-w-none min-w-0">
@@ -109,25 +113,50 @@ export default function ResearchPage() {
 
         <h2 className="mb-6 text-2xl font-semibold">Технічні деталі реалізації</h2>
 
-        <h3 className="mb-3 text-xl font-semibold">Метод 1: oEmbed API (Офіційний)</h3>
-        <p className="mb-2">
-          <strong>Endpoint:</strong>{' '}
-          <code className="bg-muted rounded px-2 py-1 text-xs sm:text-sm">
-            https://www.tiktok.com/oembed?url=video_url
-          </code>
-        </p>
+        {/* Method tabs */}
+        <div className="mb-6 flex border-b">
+          <button
+            onClick={() => setMethodTab('iframe')}
+            className={`px-4 py-2 text-sm font-medium transition-colors ${
+              methodTab === 'iframe'
+                ? 'border-primary text-foreground border-b-2'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            Прямий Iframe (рекомендований)
+          </button>
+          <button
+            onClick={() => setMethodTab('oembed')}
+            className={`px-4 py-2 text-sm font-medium transition-colors ${
+              methodTab === 'oembed'
+                ? 'border-primary text-foreground border-b-2'
+                : 'text-muted-foreground hover:text-foreground'
+            }`}
+          >
+            oEmbed API
+          </button>
+        </div>
 
-        <p className="mb-2">Відповідь містить:</p>
-        <ul className="mb-4 list-disc pl-6">
-          <li>HTML blockquote з data-video-id</li>
-          <li>URL мініатюри</li>
-          <li>Метадані автора</li>
-          <li>Стандартний embed-скрипт</li>
-        </ul>
+        {methodTab === 'oembed' && (
+          <>
+            <p className="mb-2">
+              <strong>Endpoint:</strong>{' '}
+              <code className="bg-muted rounded px-2 py-1 text-xs sm:text-sm">
+                https://www.tiktok.com/oembed?url=video_url
+              </code>
+            </p>
 
-        <div className="bg-muted -mx-4 mb-4 rounded-lg p-4 sm:mx-0">
-          <pre className="overflow-x-auto text-xs sm:text-sm">
-            <code>{`<blockquote
+            <p className="mb-2">Відповідь містить:</p>
+            <ul className="mb-4 list-disc pl-6">
+              <li>HTML blockquote з data-video-id</li>
+              <li>URL мініатюри</li>
+              <li>Метадані автора</li>
+              <li>Стандартний embed-скрипт</li>
+            </ul>
+
+            <div className="bg-muted -mx-4 mb-4 rounded-lg p-4 sm:mx-0">
+              <pre className="overflow-x-auto text-xs sm:text-sm">
+                <code>{`<blockquote
   class="tiktok-embed"
   cite="https://www.tiktok.com/@username/video/1234567890"
   data-video-id="1234567890"
@@ -136,162 +165,179 @@ export default function ResearchPage() {
   <section></section>
 </blockquote>
 <script async src="https://www.tiktok.com/embed.js"></script>`}</code>
-          </pre>
-        </div>
+              </pre>
+            </div>
 
-        <h4 className="mb-2 font-semibold">Переваги:</h4>
-        <ul className="mb-4 list-disc pl-6">
-          <li>Офіційний метод TikTok</li>
-          <li>Адаптивний дизайн</li>
-          <li>Автоматична мініатюра</li>
-          <li>Завжди актуальний плеєр</li>
-        </ul>
+            <div className="mb-6 flex flex-col gap-4 sm:flex-row">
+              <div className="flex-1 rounded-lg border border-green-200 bg-green-50/50 p-4 dark:border-green-800 dark:bg-green-900/20">
+                <h4 className="mb-3 font-semibold text-green-700 dark:text-green-400">Переваги</h4>
+                <ul className="space-y-1.5 text-sm">
+                  <li>Офіційний метод TikTok</li>
+                  <li>Адаптивний дизайн</li>
+                  <li>Автоматична мініатюра</li>
+                  <li>Завжди актуальний плеєр</li>
+                </ul>
+              </div>
+              <div className="flex-1 rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-800 dark:bg-red-900/20">
+                <h4 className="mb-3 font-semibold text-red-700 dark:text-red-400">Недоліки</h4>
+                <ul className="space-y-1.5 text-sm">
+                  <li>Нуль кастомізації внутрішніх елементів</li>
+                  <li>Брендинг TikTok незмінний</li>
+                  <li>Редирект на TikTok при взаємодії</li>
+                </ul>
+              </div>
+            </div>
+          </>
+        )}
 
-        <h4 className="mb-2 font-semibold">Недоліки:</h4>
-        <ul className="mb-6 list-disc pl-6">
-          <li>Нуль кастомізації внутрішніх елементів</li>
-          <li>Брендинг TikTok незмінний</li>
-          <li>Редирект на TikTok при взаємодії</li>
-        </ul>
+        {methodTab === 'iframe' && (
+          <>
+            <h3 className="mb-3 text-xl font-semibold">Прямий Iframe Player</h3>
+            <p className="mb-2">
+              <strong>Формат URL:</strong>{' '}
+              <code className="bg-muted rounded px-2 py-1 text-xs sm:text-sm">
+                https://www.tiktok.com/player/v1/video_id?params
+              </code>
+            </p>
 
-        <h3 className="mb-3 text-xl font-semibold">Метод 2: Прямий Iframe</h3>
-        <p className="mb-2">
-          <strong>Формат URL:</strong>{' '}
-          <code className="bg-muted rounded px-2 py-1 text-xs sm:text-sm">
-            https://www.tiktok.com/player/v1/video_id?params
-          </code>
-        </p>
+            <h4 className="mb-2 font-semibold">Доступні query-параметри (10 підтверджених):</h4>
+            <div className="-mx-4 mb-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+              <table className="w-full min-w-[500px] border-collapse text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="px-2 py-2 text-left">Параметр</th>
+                    <th className="px-2 py-2 text-left">За замовч.</th>
+                    <th className="px-2 py-2 text-left">Опис</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>autoplay</code>
+                    </td>
+                    <td className="px-2 py-2">0</td>
+                    <td className="px-2 py-2">
+                      Автовідтворення (потребує muted=1 у більшості браузерів)
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>muted</code>
+                    </td>
+                    <td className="px-2 py-2">0</td>
+                    <td className="px-2 py-2">Запуск без звуку</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>loop</code>
+                    </td>
+                    <td className="px-2 py-2">0</td>
+                    <td className="px-2 py-2">Циклічне відтворення</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>music_info</code>
+                    </td>
+                    <td className="px-2 py-2">1</td>
+                    <td className="px-2 py-2">Показувати інфо про музику</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>description</code>
+                    </td>
+                    <td className="px-2 py-2">1</td>
+                    <td className="px-2 py-2">Показувати опис відео</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>rel</code>
+                    </td>
+                    <td className="px-2 py-2">1</td>
+                    <td className="px-2 py-2">Показувати рекомендовані відео</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>controls</code>
+                    </td>
+                    <td className="px-2 py-2">1</td>
+                    <td className="px-2 py-2">Показувати елементи управління</td>
+                  </tr>
+                  <tr className="border-b bg-red-950/20">
+                    <td className="px-2 py-2 line-through opacity-60">
+                      <code>progress_bar</code>
+                    </td>
+                    <td className="px-2 py-2 opacity-60">—</td>
+                    <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
+                  </tr>
+                  <tr className="border-b bg-red-950/20">
+                    <td className="px-2 py-2 line-through opacity-60">
+                      <code>play_button</code>
+                    </td>
+                    <td className="px-2 py-2 opacity-60">—</td>
+                    <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
+                  </tr>
+                  <tr className="border-b bg-red-950/20">
+                    <td className="px-2 py-2 line-through opacity-60">
+                      <code>volume_control</code>
+                    </td>
+                    <td className="px-2 py-2 opacity-60">—</td>
+                    <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
+                  </tr>
+                  <tr className="border-b bg-red-950/20">
+                    <td className="px-2 py-2 line-through opacity-60">
+                      <code>fullscreen_button</code>
+                    </td>
+                    <td className="px-2 py-2 opacity-60">—</td>
+                    <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>timestamp</code>
+                    </td>
+                    <td className="px-2 py-2">1</td>
+                    <td className="px-2 py-2">Показувати час відтворення</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>closed_caption</code>
+                    </td>
+                    <td className="px-2 py-2">1</td>
+                    <td className="px-2 py-2">Показувати кнопку субтитрів</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-2 py-2">
+                      <code>native_context_menu</code>
+                    </td>
+                    <td className="px-2 py-2">1</td>
+                    <td className="px-2 py-2">Показувати контекстне меню (ПКМ)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-        <h4 className="mb-2 font-semibold">Доступні query-параметри (10 підтверджених):</h4>
-        <div className="-mx-4 mb-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-          <table className="w-full min-w-[500px] border-collapse text-sm">
-            <thead>
-              <tr className="border-b">
-                <th className="px-2 py-2 text-left">Параметр</th>
-                <th className="px-2 py-2 text-left">За замовч.</th>
-                <th className="px-2 py-2 text-left">Опис</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>autoplay</code>
-                </td>
-                <td className="px-2 py-2">0</td>
-                <td className="px-2 py-2">
-                  Автовідтворення (потребує muted=1 у більшості браузерів)
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>muted</code>
-                </td>
-                <td className="px-2 py-2">0</td>
-                <td className="px-2 py-2">Запуск без звуку</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>loop</code>
-                </td>
-                <td className="px-2 py-2">0</td>
-                <td className="px-2 py-2">Циклічне відтворення</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>music_info</code>
-                </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати інфо про музику</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>description</code>
-                </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати опис відео</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>rel</code>
-                </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати рекомендовані відео</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>controls</code>
-                </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати елементи управління</td>
-              </tr>
-              <tr className="border-b bg-red-950/20">
-                <td className="px-2 py-2 line-through opacity-60">
-                  <code>progress_bar</code>
-                </td>
-                <td className="px-2 py-2 opacity-60">—</td>
-                <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
-              </tr>
-              <tr className="border-b bg-red-950/20">
-                <td className="px-2 py-2 line-through opacity-60">
-                  <code>play_button</code>
-                </td>
-                <td className="px-2 py-2 opacity-60">—</td>
-                <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
-              </tr>
-              <tr className="border-b bg-red-950/20">
-                <td className="px-2 py-2 line-through opacity-60">
-                  <code>volume_control</code>
-                </td>
-                <td className="px-2 py-2 opacity-60">—</td>
-                <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
-              </tr>
-              <tr className="border-b bg-red-950/20">
-                <td className="px-2 py-2 line-through opacity-60">
-                  <code>fullscreen_button</code>
-                </td>
-                <td className="px-2 py-2 opacity-60">—</td>
-                <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>timestamp</code>
-                </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати час відтворення</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>closed_caption</code>
-                </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати кнопку субтитрів</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
-                  <code>native_context_menu</code>
-                </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати контекстне меню (ПКМ)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h4 className="mb-2 font-semibold">Переваги:</h4>
-        <ul className="mb-4 list-disc pl-6">
-          <li>10 підтверджених параметрів кастомізації</li>
-          <li>Явне задання розмірів (width/height)</li>
-          <li>Можна приховати: опис, музику, рекомендації, прогрес-бар та інше</li>
-          <li>Autoplay з muted=1 працює у більшості браузерів</li>
-          <li>Циклічне відтворення (loop)</li>
-        </ul>
-
-        <h4 className="mb-2 font-semibold">Недоліки:</h4>
-        <ul className="mb-6 list-disc pl-6">
-          <li>Все ще показує брендинг TikTok та інфо автора</li>
-          <li>Менш документований ніж oEmbed</li>
-          <li>Та сама поведінка редиректу</li>
-        </ul>
+            <div className="mb-6 flex flex-col gap-4 sm:flex-row">
+              <div className="flex-1 rounded-lg border border-green-200 bg-green-50/50 p-4 dark:border-green-800 dark:bg-green-900/20">
+                <h4 className="mb-3 font-semibold text-green-700 dark:text-green-400">Переваги</h4>
+                <ul className="space-y-1.5 text-sm">
+                  <li>10 підтверджених параметрів кастомізації</li>
+                  <li>Явне задання розмірів (width/height)</li>
+                  <li>Можна приховати: опис, музику, рекомендації та інше</li>
+                  <li>Autoplay з muted=1 працює у більшості браузерів</li>
+                  <li>Циклічне відтворення (loop)</li>
+                </ul>
+              </div>
+              <div className="flex-1 rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-800 dark:bg-red-900/20">
+                <h4 className="mb-3 font-semibold text-red-700 dark:text-red-400">Недоліки</h4>
+                <ul className="space-y-1.5 text-sm">
+                  <li>Все ще показує брендинг TikTok та інфо автора</li>
+                  <li>Лайки, коментарі, поділитися — завжди видимі</li>
+                  <li>Менш документований ніж oEmbed</li>
+                  <li>Та сама поведінка редиректу</li>
+                </ul>
+              </div>
+            </div>
+          </>
+        )}
 
         <hr className="my-8" />
 
