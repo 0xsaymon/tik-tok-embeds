@@ -130,24 +130,21 @@ export default function EmbedConfigPanel({
   onControlsToggle,
 }: EmbedConfigPanelProps) {
   if (activeTab === 'oembed') {
+    if (compact) return null;
     return (
-      <div className={compact ? 'flex items-center gap-3' : 'space-y-4'}>
-        <div className={compact ? 'flex items-center gap-2' : 'space-y-2'}>
-          {!compact && <Label>Макс. ширина (px)</Label>}
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <Label>Макс. ширина (px)</Label>
           <Input
             type="number"
             value={config.oembedMaxWidth}
             onChange={e => onConfigChange({ oembedMaxWidth: parseInt(e.target.value) })}
-            className={compact ? 'h-8 w-20 text-xs' : ''}
-            placeholder="Width"
           />
         </div>
-        {!compact && (
-          <Typography variant="small" className="text-muted-foreground text-xs">
-            oEmbed не підтримує кастомізацію внутрішніх елементів. Можна змінити лише max-width
-            контейнера. Висота визначається автоматично.
-          </Typography>
-        )}
+        <Typography variant="small" className="text-muted-foreground text-xs">
+          oEmbed не підтримує кастомізацію внутрішніх елементів. Можна змінити лише max-width
+          контейнера. Висота визначається автоматично.
+        </Typography>
       </div>
     );
   }

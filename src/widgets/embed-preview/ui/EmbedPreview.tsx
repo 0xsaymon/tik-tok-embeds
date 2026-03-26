@@ -24,10 +24,14 @@ export default function EmbedPreview({ activeTab, config, iframeUrl }: EmbedPrev
           key={iframeUrl}
           src={iframeUrl}
           allow="fullscreen"
-          className="rounded-lg"
+          className="h-auto w-full rounded-lg lg:h-auto lg:w-auto"
+          style={{
+            aspectRatio: `${config.width} / ${config.height}`,
+            maxWidth: Math.max(config.width, 280),
+            maxHeight: '100%',
+          }}
           width={config.width}
           height={config.height}
-          style={{ maxWidth: '100%', maxHeight: '100%' }}
           title="TikTok Video"
         />
       </div>

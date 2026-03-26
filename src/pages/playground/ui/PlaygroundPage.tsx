@@ -54,7 +54,6 @@ export default function PlaygroundPage() {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Sync ?tab= query param → store on mount
   useEffect(() => {
     const tabParam = searchParams.get('tab') as TabValue | null;
     if (tabParam && (tabParam === 'iframe' || tabParam === 'oembed') && tabParam !== activeTab) {
@@ -63,7 +62,6 @@ export default function PlaygroundPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Sync store → URL when tab changes
   const handleTabChange = (tab: TabValue) => {
     setActiveTab(tab);
     setSearchParams({ tab }, { replace: true });
@@ -72,9 +70,9 @@ export default function PlaygroundPage() {
   const iframeUrl = useMemo(() => buildIframeUrl(config), [config]);
 
   return (
-    <main className="flex h-[calc(100dvh-57px-4rem)] flex-col overflow-hidden md:mx-auto md:h-[calc(100dvh-57px)] md:w-full md:max-w-7xl md:px-6 md:py-6 lg:px-8">
-      {/* ===== DESKTOP ===== */}
-      <div className="hidden h-full flex-col md:flex">
+    <main className="flex h-[calc(100dvh-57px-4rem)] flex-col overflow-hidden lg:mx-auto lg:h-[calc(100dvh-57px)] lg:w-full lg:max-w-7xl lg:px-6 lg:py-6">
+      {/* ===== DESKTOP (lg+) ===== */}
+      <div className="hidden h-full flex-col lg:flex">
         <Typography variant="h1" className="mb-2 text-2xl font-bold">
           Playground
         </Typography>
@@ -84,8 +82,8 @@ export default function PlaygroundPage() {
 
         <div className="grid min-h-0 flex-1 grid-cols-3 gap-8">
           <div className="min-h-0 space-y-4 overflow-auto rounded-lg border p-6">
-            <div className="flex gap-2">
-              <div className="relative flex-1">
+            <div className="flex flex-wrap gap-2">
+              <div className="relative min-w-0 flex-1">
                 <Input
                   placeholder="TikTok URL або Video ID"
                   value={url}
@@ -102,7 +100,7 @@ export default function PlaygroundPage() {
                   </button>
                 )}
               </div>
-              <Button size="sm" onClick={handleUrlSubmit}>
+              <Button size="sm" onClick={handleUrlSubmit} className="shrink-0">
                 Завантажити
               </Button>
             </div>
@@ -118,8 +116,8 @@ export default function PlaygroundPage() {
         </div>
       </div>
 
-      {/* ===== MOBILE ===== */}
-      <div className="flex min-h-0 flex-1 flex-col md:hidden">
+      {/* ===== MOBILE + TABLET (<lg) ===== */}
+      <div className="flex min-h-0 flex-1 flex-col lg:hidden">
         <div className="min-h-0 flex-1 overflow-auto">
           <EmbedPreview activeTab={activeTab} config={config} iframeUrl={iframeUrl} />
         </div>
