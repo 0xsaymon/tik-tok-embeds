@@ -34,11 +34,19 @@ export default function ResearchPage() {
           <h2 className="mb-4 text-2xl font-semibold">Огляд</h2>
           <p className="text-muted-foreground mb-4">
             Цей документ підсумовує дослідження можливостей кастомізації TikTok embed, проведене для{' '}
-            <strong>ZP-4177</strong> (Viral Tab v1).
+            <a
+              href="https://zeely.atlassian.net/browse/ZP-4177"
+              className="font-semibold text-blue-500 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ZP-4177
+            </a>{' '}
+            (Viral Tab v1).
           </p>
           <div className="space-y-2 text-sm">
             <p>
-              <strong>Дата дослідження:</strong> 25 березня 2025
+              <strong>Дата дослідження:</strong> 25 - 26 березня 2026
             </p>
             <p>
               <strong>Playground:</strong>{' '}
@@ -60,7 +68,16 @@ export default function ResearchPage() {
 
         <h3 className="mb-3 text-xl font-semibold">Початкові питання</h3>
         <p className="text-muted-foreground mb-2">
-          Зі Slack-повідомлення в #viral_content_product_team (25 березня 2025):
+          Зі{' '}
+          <a
+            href="https://zeelytalk.slack.com/archives/C0AKS3PS02V/p1774431239110209"
+            className="text-blue-500 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Slack-повідомлення
+          </a>{' '}
+          в #viral_content_product_team (25 березня 2026):
         </p>
         <blockquote className="border-muted my-4 border-l-4 pl-4 italic">
           &quot;Ми плануємо показувати приклади оригінальних вірусних відео з TikTok у нашому
