@@ -81,14 +81,14 @@ export default function ResearchPage() {
               <tr className="border-b">
                 <td className="px-2 py-3">3</td>
                 <td className="px-2 py-3 font-semibold">
-                  Чи можна прибрати метрики (лайки, коментарі)?
+                  Чи можна прибрати метрики (лайки, коментарі, поділитися)?
                 </td>
                 <td className="px-2 py-3">
-                  <strong>Так, через Iframe Player</strong> — 10 підтверджених query-параметрів
-                  дозволяють приховати опис, музику, рекомендації, controls та інші елементи UI. В
-                  oEmbed — неможливо.
+                  <strong>Ні</strong> — кнопки лайків, коментарів та &quot;поділитися&quot; завжди
+                  видимі. Параметра для їх приховування не існує в API. Можна приховати лише опис,
+                  музику, рекомендації та панель управління.
                 </td>
-                <td className="px-2 py-3 text-green-600">Iframe: Так</td>
+                <td className="px-2 py-3 text-red-600">Неможливо</td>
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-3">4</td>
