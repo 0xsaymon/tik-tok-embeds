@@ -12,7 +12,7 @@ interface Alternative {
   pros: string[];
   cons: string[];
   verdict: string;
-  link?: { to: string; label: string };
+  links?: { to: string; label: string }[];
 }
 
 const alternatives: Alternative[] = [
@@ -35,40 +35,24 @@ const alternatives: Alternative[] = [
     verdict: '❌ Не рекомендовано для продакшену через юридичні ризики',
   },
   {
-    name: 'Мініатюра + кастомний Overlay',
+    name: 'Стандартний oEmbed',
     status: 'partial',
-    description: 'Використати URL мініатюри TikTok oEmbed + кастомна кнопка відтворення поверх',
+    description:
+      'Офіційний TikTok oEmbed (blockquote + embed.js) — нуль кастомізації внутрішніх елементів',
     pros: [
-      'Чистий UI до взаємодії',
-      'Кастомний overlay відповідає брендингу Zeely',
-      'Клік відкриває embed у модалці/lightbox',
-      'Краща візуальна інтеграція',
+      'Офіційний, найстабільніший метод',
+      'Мінімальний юридичний ризик',
+      'Нульові витрати на підтримку',
+      'Завжди актуальний плеєр',
     ],
     cons: [
-      'Потрібен другий клік для відтворення',
-      'Немає нативного плеєра TikTok спочатку',
-      'Мініатюра може бути застарілою',
-      'Додаткова складність реалізації',
+      'Нуль кастомізації — лише max-width контейнера',
+      'Висота визначається TikTok автоматично',
+      'Усі елементи UI завжди видимі',
+      'Редирект на TikTok при кліку',
     ],
-    verdict: '⚠️ Часткове рішення — добре для превью, embed при взаємодії',
-  },
-  {
-    name: 'TikTok Web SDK (Enterprise)',
-    status: 'recommended',
-    description: 'TikTok for Developers пропонує розширені API для верифікованих партнерів',
-    pros: [
-      'Потенційний доступ до кастомізації',
-      'Інтеграція аналітики',
-      'Верифіковані бізнес-акаунти',
-      'Офіційний канал підтримки',
-    ],
-    cons: [
-      'Потрібна заявка на партнерство',
-      'Ймовірно платний сервіс',
-      'Не задокументовано публічно',
-      'Процес схвалення невідомий',
-    ],
-    verdict: '⏳ Потрібен бізнес-запит — найперспективніший довгостроково',
+    verdict: '⚠️ Для простого превью, але iframe player дає більше контролю',
+    links: [{ to: '/?tab=oembed', label: 'Відкрити в Пісочниці' }],
   },
   {
     name: 'Direct Iframe Player (/player/v1/)',
@@ -88,28 +72,29 @@ const alternatives: Alternative[] = [
       'Редирект на TikTok при кліку',
       'Потенційно менш стабільний API',
     ],
-    verdict: '✅ Рекомендовано для Zeely — найкращий баланс кастомізації та стабільності',
-    link: { to: '/?tab=iframe', label: 'Відкрити в Пісочниці' },
+    verdict: '✅ Рекомендовано — найкращий баланс кастомізації та стабільності',
+    links: [
+      { to: '/?tab=iframe', label: 'Пісочниця' },
+      { to: '/grid', label: 'Сітка' },
+    ],
   },
   {
-    name: 'Стандартний oEmbed',
-    status: 'partial',
-    description:
-      'Офіційний TikTok oEmbed (blockquote + embed.js) — нуль кастомізації внутрішніх елементів',
+    name: 'TikTok Web SDK (Enterprise)',
+    status: 'recommended',
+    description: 'TikTok for Developers пропонує розширені API для верифікованих партнерів',
     pros: [
-      'Офіційний, найстабільніший метод',
-      'Мінімальний юридичний ризик',
-      'Нульові витрати на підтримку',
-      'Завжди актуальний плеєр',
+      'Потенційний доступ до кастомізації',
+      'Інтеграція аналітики',
+      'Верифіковані бізнес-акаунти',
+      'Офіційний канал підтримки',
     ],
     cons: [
-      'Нуль кастомізації — лише max-width контейнера',
-      'Висота визначається TikTok автоматично',
-      'Усі елементи UI завжди видимі',
-      'Редирект на TikTok при кліку',
+      'Потрібна заявка на партнерство',
+      'Ймовірно платний сервіс',
+      'Не задокументовано публічно',
+      'Процес схвалення невідомий',
     ],
-    verdict: '⚠️ Підходить для простого превью, але iframe player дає більше контролю',
-    link: { to: '/?tab=oembed', label: 'Відкрити в Пісочниці' },
+    verdict: '⏳ Потрібен бізнес-запит — найперспективніший довгостроково',
   },
 ];
 
@@ -140,9 +125,18 @@ export default function AlternativesPage() {
         кастомізації.
       </Typography>
 
-      <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
         {alternatives.map(alt => (
-          <Card key={alt.name}>
+          <Card
+            key={alt.name}
+            className={
+              alt.status === 'not-recommended'
+                ? 'border-red-200 bg-red-50/30 dark:border-red-800/50 dark:bg-red-950/20'
+                : alt.status === 'partial'
+                  ? 'border-yellow-200 bg-yellow-50/30 dark:border-yellow-800/50 dark:bg-yellow-950/20'
+                  : 'border-green-200 bg-green-50/30 dark:border-green-800/50 dark:bg-green-950/20'
+            }
+          >
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div>
@@ -187,63 +181,32 @@ export default function AlternativesPage() {
               </div>
             </CardContent>
             <div className="mt-auto border-t px-6 pt-4">
-              <div className="flex items-center gap-2 font-semibold">
-                <AlertCircle className="h-4 w-4 text-blue-500" />
-                Висновок:
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 font-semibold">
+                  <AlertCircle className="h-4 w-4 text-blue-500" />
+                  Висновок:
+                </div>
+                {alt.links && (
+                  <div className="flex items-center gap-3">
+                    {alt.links.map(link => (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        className="inline-flex items-center gap-1 text-sm text-blue-500 hover:underline"
+                      >
+                        {link.label}
+                        <ExternalLink className="h-3 w-3" />
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
               <Typography variant="p" className="text-muted-foreground mt-1">
                 {alt.verdict}
               </Typography>
-              {alt.link && (
-                <Link
-                  to={alt.link.to}
-                  className="mt-2 inline-flex items-center gap-1 text-sm text-blue-500 hover:underline"
-                >
-                  {alt.link.label}
-                  <ExternalLink className="h-3 w-3" />
-                </Link>
-              )}
             </div>
           </Card>
         ))}
-
-        <Card className="border-green-200 bg-green-50/50 sm:col-span-2 lg:col-span-3 dark:bg-green-900/20">
-          <CardHeader>
-            <CardTitle>Рекомендований підхід для Zeely</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 sm:grid-cols-3">
-              <div>
-                <h4 className="font-semibold">Фаза 1 (MVP)</h4>
-                <p className="text-muted-foreground">
-                  Використовувати Direct Iframe Player (/player/v1/) з оптимальними параметрами
-                  (rel=0, description=0) для чистого вигляду превью.
-                </p>
-                <Link
-                  to="/grid"
-                  className="mt-2 inline-flex items-center gap-1 text-sm text-blue-500 hover:underline"
-                >
-                  Переглянути сітку
-                  <ExternalLink className="h-3 w-3" />
-                </Link>
-              </div>
-              <div>
-                <h4 className="font-semibold">Фаза 2 (Покращення)</h4>
-                <p className="text-muted-foreground">
-                  Мініатюра + lazy load: отримати thumbnail через oEmbed API, показати кастомну
-                  картку, завантажувати iframe тільки при взаємодії.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-semibold">Фаза 3 (Enterprise)</h4>
-                <p className="text-muted-foreground">
-                  Подати заявку на партнерство TikTok for Developers для доступу до розширених API з
-                  можливостями кастомізації.
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
