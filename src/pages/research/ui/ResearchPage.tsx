@@ -198,7 +198,7 @@ export default function ResearchPage() {
             <div className="mb-6 flex flex-col gap-4 sm:flex-row">
               <div className="flex-1 rounded-lg border border-green-200 bg-green-50/50 p-4 dark:border-green-800 dark:bg-green-900/20">
                 <h4 className="mb-3 font-semibold text-green-700 dark:text-green-400">Переваги</h4>
-                <ul className="space-y-1.5 text-sm">
+                <ul className="list-disc space-y-1.5 pl-4 text-sm">
                   <li>Офіційний метод TikTok</li>
                   <li>Адаптивний дизайн</li>
                   <li>Автоматична мініатюра</li>
@@ -207,7 +207,7 @@ export default function ResearchPage() {
               </div>
               <div className="flex-1 rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-800 dark:bg-red-900/20">
                 <h4 className="mb-3 font-semibold text-red-700 dark:text-red-400">Недоліки</h4>
-                <ul className="space-y-1.5 text-sm">
+                <ul className="list-disc space-y-1.5 pl-4 text-sm">
                   <li>Нуль кастомізації внутрішніх елементів</li>
                   <li>Брендинг TikTok незмінний</li>
                   <li>Редирект на TikTok при взаємодії</li>
@@ -350,7 +350,7 @@ export default function ResearchPage() {
             <div className="mb-6 flex flex-col gap-4 sm:flex-row">
               <div className="flex-1 rounded-lg border border-green-200 bg-green-50/50 p-4 dark:border-green-800 dark:bg-green-900/20">
                 <h4 className="mb-3 font-semibold text-green-700 dark:text-green-400">Переваги</h4>
-                <ul className="space-y-1.5 text-sm">
+                <ul className="list-disc space-y-1.5 pl-4 text-sm">
                   <li>10 підтверджених параметрів кастомізації</li>
                   <li>Явне задання розмірів (width/height)</li>
                   <li>Можна приховати: опис, музику, рекомендації та інше</li>
@@ -360,7 +360,7 @@ export default function ResearchPage() {
               </div>
               <div className="flex-1 rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-800 dark:bg-red-900/20">
                 <h4 className="mb-3 font-semibold text-red-700 dark:text-red-400">Недоліки</h4>
-                <ul className="space-y-1.5 text-sm">
+                <ul className="list-disc space-y-1.5 pl-4 text-sm">
                   <li>Все ще показує брендинг TikTok та інфо автора</li>
                   <li>Лайки, коментарі, поділитися — завжди видимі</li>
                   <li>Менш документований ніж oEmbed</li>
@@ -383,7 +383,7 @@ export default function ResearchPage() {
             <h3 className="mb-3 font-semibold text-red-700 dark:text-red-400">
               Брендинг та атрибуція
             </h3>
-            <ul className="space-y-1.5 text-sm">
+            <ul className="list-disc space-y-1.5 pl-4 text-sm">
               <li>Логотип TikTok у шапці embed</li>
               <li>Кнопка &quot;Дивитися більше на TikTok&quot;</li>
               <li>Ім&apos;я користувача та аватар автора</li>
@@ -395,7 +395,7 @@ export default function ResearchPage() {
             <h3 className="mb-3 font-semibold text-red-700 dark:text-red-400">
               Інтерактивні елементи
             </h3>
-            <ul className="space-y-1.5 text-sm">
+            <ul className="list-disc space-y-1.5 pl-4 text-sm">
               <li>Кнопки лайк/коментар/поділитися (завжди видимі)</li>
               <li>Поведінка click-to-play</li>
               <li>Редирект при натисканні на будь-який елемент</li>
@@ -404,7 +404,7 @@ export default function ResearchPage() {
 
           <div className="rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-800 dark:bg-red-900/20">
             <h3 className="mb-3 font-semibold text-red-700 dark:text-red-400">Стилізація</h3>
-            <ul className="space-y-1.5 text-sm">
+            <ul className="list-disc space-y-1.5 pl-4 text-sm">
               <li>Внутрішній CSS iframe (обмеження CORS)</li>
               <li>Колірна схема (слідує бренду TikTok)</li>
               <li>Шрифти</li>
@@ -415,7 +415,7 @@ export default function ResearchPage() {
             <h3 className="mb-3 font-semibold text-yellow-700 dark:text-yellow-400">
               Поведінка (частково)
             </h3>
-            <ul className="space-y-1.5 text-sm">
+            <ul className="list-disc space-y-1.5 pl-4 text-sm">
               <li>
                 Autoplay — <strong>працює</strong> в iframe з <code>muted=1</code>
               </li>
