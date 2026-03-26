@@ -16,6 +16,8 @@ const TOGGLE_ITEMS: { label: string; key: keyof EmbedConfig }[] = [
   { label: 'Опис', key: 'description' },
   { label: 'Рекомендовані', key: 'rel' },
   { label: 'Час', key: 'timestamp' },
+  { label: 'Субтитри', key: 'closedCaption' },
+  { label: 'Контекстне меню', key: 'nativeContextMenu' },
 ];
 
 interface GridCellProps {

@@ -84,7 +84,7 @@ export default function ResearchPage() {
                   Чи можна прибрати метрики (лайки, коментарі)?
                 </td>
                 <td className="px-2 py-3">
-                  <strong>Так, через Iframe Player</strong> — 8 підтверджених query-параметрів
+                  <strong>Так, через Iframe Player</strong> — 10 підтверджених query-параметрів
                   дозволяють приховати опис, музику, рекомендації, controls та інші елементи UI. В
                   oEmbed — неможливо.
                 </td>
@@ -162,7 +162,7 @@ export default function ResearchPage() {
           </code>
         </p>
 
-        <h4 className="mb-2 font-semibold">Доступні query-параметри (8 підтверджених):</h4>
+        <h4 className="mb-2 font-semibold">Доступні query-параметри (10 підтверджених):</h4>
         <div className="-mx-4 mb-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
           <table className="w-full min-w-[500px] border-collapse text-sm">
             <thead>
@@ -259,13 +259,27 @@ export default function ResearchPage() {
                 <td className="px-2 py-2">1</td>
                 <td className="px-2 py-2">Показувати час відтворення</td>
               </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
+                  <code>closed_caption</code>
+                </td>
+                <td className="px-2 py-2">1</td>
+                <td className="px-2 py-2">Показувати кнопку субтитрів</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">
+                  <code>native_context_menu</code>
+                </td>
+                <td className="px-2 py-2">1</td>
+                <td className="px-2 py-2">Показувати контекстне меню (ПКМ)</td>
+              </tr>
             </tbody>
           </table>
         </div>
 
         <h4 className="mb-2 font-semibold">Переваги:</h4>
         <ul className="mb-4 list-disc pl-6">
-          <li>8 підтверджених параметрів кастомізації</li>
+          <li>10 підтверджених параметрів кастомізації</li>
           <li>Явне задання розмірів (width/height)</li>
           <li>Можна приховати: опис, музику, рекомендації, прогрес-бар та інше</li>
           <li>Autoplay з muted=1 працює у більшості браузерів</li>
@@ -371,7 +385,7 @@ export default function ResearchPage() {
           <strong>Обгрунтування:</strong>
         </p>
         <ul className="mb-6 list-disc pl-6">
-          <li>8 підтверджених параметрів кастомізації</li>
+          <li>10 підтверджених параметрів кастомізації</li>
           <li>Явне задання розмірів</li>
           <li>Можна приховати непотрібні елементи (рекомендації, опис, музику)</li>
           <li>Autoplay + loop для кращого UX</li>
@@ -514,7 +528,7 @@ export default function ResearchPage() {
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-2">Приховати елементи UI</td>
-                <td className="px-2 py-2 text-green-600">Iframe: 8 параметрів</td>
+                <td className="px-2 py-2 text-green-600">Iframe: 10 параметрів</td>
                 <td className="px-2 py-2">Опис, музика, рекомендації, controls, timestamp</td>
               </tr>
               <tr className="border-b">
@@ -545,7 +559,7 @@ export default function ResearchPage() {
           <p className="mb-2 font-semibold">Підсумок:</p>
           <p>
             TikTok embed створений для залучення трафіку на TikTok. Повна кастомізація UI обмежена,
-            але <strong>Direct Iframe Player (/player/v1/)</strong> дає 8 підтверджених параметрів
+            але <strong>Direct Iframe Player (/player/v1/)</strong> дає 10 підтверджених параметрів
             для налаштування відображення. Рекомендований підхід для Zeely — використовувати iframe
             player з оптимальним набором параметрів (rel=0, description=0) для чистого вигляду
             превью.

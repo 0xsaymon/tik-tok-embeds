@@ -64,6 +64,8 @@ const IFRAME_CONTROLS: {
       { id: 'description', label: 'Опис', key: 'description' },
       { id: 'rel', label: 'Рекомендовані', key: 'rel' },
       { id: 'timestamp', label: 'Час', key: 'timestamp' },
+      { id: 'closed-caption', label: 'Субтитри', key: 'closedCaption' },
+      { id: 'native-context-menu', label: 'Контекстне меню', key: 'nativeContextMenu' },
     ],
   },
 ];

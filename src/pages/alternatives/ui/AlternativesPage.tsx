@@ -74,9 +74,9 @@ const alternatives: Alternative[] = [
     name: 'Direct Iframe Player (/player/v1/)',
     status: 'recommended',
     description:
-      'Використати TikTok iframe player з 8 підтвердженими query-параметрами для кастомізації',
+      'Використати TikTok iframe player з 10 підтвердженими query-параметрами для кастомізації',
     pros: [
-      '8 підтверджених параметрів (controls, description, music_info, rel, timestamp та ін.)',
+      '10 підтверджених параметрів (controls, description, music_info, rel, timestamp, closed_caption та ін.)',
       'Явне задання width/height',
       'Autoplay з muted, циклічне відтворення (loop)',
       'Можна приховати рекомендовані відео (rel=0)',

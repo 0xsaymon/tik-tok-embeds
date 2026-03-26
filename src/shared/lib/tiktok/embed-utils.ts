@@ -10,6 +10,8 @@ export function buildIframeUrl(config: EmbedConfig): string {
     rel: config.rel ? '1' : '0',
     controls: config.controls ? '1' : '0',
     timestamp: config.timestamp ? '1' : '0',
+    closed_caption: config.closedCaption ? '1' : '0',
+    native_context_menu: config.nativeContextMenu ? '1' : '0',
   });
   return `https://www.tiktok.com/player/v1/${config.videoId}?${params.toString()}`;
 }

@@ -50,6 +50,6 @@ app/ → pages/ → widgets/ → features/ → shared/
 Two methods exist with different capabilities:
 
 - **oEmbed** (blockquote + embed.js): Zero customization of internal elements. Only `max-width` on container.
-- **Iframe Player** (`/player/v1/{id}?params`): 8 verified query parameters (autoplay, muted, loop, music_info, description, rel, controls, timestamp). 4 params from vibe-coded demo don't work (progress_bar, play_button, volume_control, fullscreen_button). Recommended approach.
+- **Iframe Player** (`/player/v1/{id}?params`): 10 verified query parameters (autoplay, muted, loop, music_info, description, rel, controls, timestamp, closed_caption, native_context_menu). 4 params from vibe-coded demo don't work (progress_bar, play_button, volume_control, fullscreen_button). Recommended approach.
 
 Neither method allows: hiding author info, removing TikTok branding, or blocking redirects.

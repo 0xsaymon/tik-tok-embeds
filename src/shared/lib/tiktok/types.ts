@@ -11,6 +11,8 @@ export interface EmbedConfig {
   rel: boolean;
   controls: boolean;
   timestamp: boolean;
+  closedCaption: boolean;
+  nativeContextMenu: boolean;
 }
 
 export type TabValue = 'iframe' | 'oembed';

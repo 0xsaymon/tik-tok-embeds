@@ -14,4 +14,6 @@ export const DEFAULT_IFRAME_CONFIG: Omit<EmbedConfig, 'videoId' | 'width' | 'hei
   rel: true,
   controls: true,
   timestamp: true,
+  closedCaption: true,
+  nativeContextMenu: true,
 };
