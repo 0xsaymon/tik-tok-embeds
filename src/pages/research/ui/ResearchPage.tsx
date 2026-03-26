@@ -496,53 +496,46 @@ export default function ResearchPage() {
 
         <hr className="my-8" />
 
-        <h2 className="mb-4 text-2xl font-semibold">Підсумок для стейкхолдерів</h2>
+        <h2 className="mb-4 text-2xl font-semibold">Підсумок</h2>
         <div className="-mx-4 mb-8 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-          <table className="w-full min-w-[500px] border-collapse text-sm">
+          <table className="w-full min-w-[400px] border-collapse text-sm">
             <thead>
               <tr className="border-b">
                 <th className="px-2 py-2 text-left">Вимога</th>
-                <th className="px-2 py-2 text-left">Можна</th>
-                <th className="px-2 py-2 text-left">Не можна</th>
-                <th className="px-2 py-2 text-left">Обхідний шлях</th>
+                <th className="px-2 py-2 text-left">Статус</th>
+                <th className="px-2 py-2 text-left">Примітка</th>
               </tr>
             </thead>
             <tbody>
               <tr className="border-b">
                 <td className="px-2 py-2">Кастомні розміри</td>
                 <td className="px-2 py-2 text-green-600">Так</td>
-                <td className="px-2 py-2">—</td>
-                <td className="px-2 py-2">CSS-обгортка</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">Прибрати брендинг TikTok</td>
-                <td className="px-2 py-2">—</td>
-                <td className="px-2 py-2 text-red-600">Ні</td>
-                <td className="px-2 py-2">Мініатюра</td>
-              </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">Прибрати інфо автора</td>
-                <td className="px-2 py-2">—</td>
-                <td className="px-2 py-2 text-red-600">Ні</td>
-                <td className="px-2 py-2">Немає параметра в API</td>
+                <td className="px-2 py-2">CSS-обгортка або iframe width/height</td>
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-2">Приховати елементи UI</td>
                 <td className="px-2 py-2 text-green-600">Iframe: 8 параметрів</td>
-                <td className="px-2 py-2">—</td>
-                <td className="px-2 py-2">Опис, музика, рекомендації, controls та ін.</td>
+                <td className="px-2 py-2">Опис, музика, рекомендації, controls, timestamp</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">Прибрати брендинг TikTok</td>
+                <td className="px-2 py-2 text-red-600">Ні</td>
+                <td className="px-2 py-2">Логотип та &quot;Watch now&quot; завжди видимі</td>
+              </tr>
+              <tr className="border-b">
+                <td className="px-2 py-2">Прибрати інфо автора</td>
+                <td className="px-2 py-2 text-red-600">Ні</td>
+                <td className="px-2 py-2">Немає параметра в API</td>
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-2">Вимкнути редиректи</td>
-                <td className="px-2 py-2">—</td>
                 <td className="px-2 py-2 text-red-600">Ні</td>
-                <td className="px-2 py-2">Немає (обмеження CORS)</td>
+                <td className="px-2 py-2">Обмеження CORS — неможливо перехопити</td>
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-2">Кастомна стилізація</td>
                 <td className="px-2 py-2 text-yellow-600">Тільки обгортка</td>
-                <td className="px-2 py-2 text-red-600">Внутрішні</td>
-                <td className="px-2 py-2">CSS-контейнер</td>
+                <td className="px-2 py-2">Внутрішні стилі iframe недоступні (CORS)</td>
               </tr>
             </tbody>
           </table>
