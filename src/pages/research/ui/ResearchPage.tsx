@@ -378,40 +378,54 @@ export default function ResearchPage() {
           На основі офіційної документації та тестування:
         </p>
 
-        <h3 className="mb-2 text-lg font-semibold text-red-600">Брендинг та атрибуція</h3>
-        <ul className="mb-4 list-disc pl-6">
-          <li>Логотип TikTok у шапці embed</li>
-          <li>Кнопка &quot;Дивитися більше на TikTok&quot;</li>
-          <li>Ім&apos;я користувача та аватар автора</li>
-          <li>Кнопка &quot;Переглянути профіль&quot;</li>
-        </ul>
+        <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-800 dark:bg-red-900/20">
+            <h3 className="mb-3 font-semibold text-red-700 dark:text-red-400">
+              Брендинг та атрибуція
+            </h3>
+            <ul className="space-y-1.5 text-sm">
+              <li>Логотип TikTok у шапці embed</li>
+              <li>Кнопка &quot;Дивитися більше на TikTok&quot;</li>
+              <li>Ім&apos;я користувача та аватар автора</li>
+              <li>Кнопка &quot;Переглянути профіль&quot;</li>
+            </ul>
+          </div>
 
-        <h3 className="mb-2 text-lg font-semibold text-red-600">Інтерактивні елементи</h3>
-        <ul className="mb-4 list-disc pl-6">
-          <li>Кнопки лайк/коментар/поділитися (завжди видимі)</li>
-          <li>Поведінка click-to-play</li>
-          <li>Редирект при натисканні на будь-який елемент</li>
-        </ul>
+          <div className="rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-800 dark:bg-red-900/20">
+            <h3 className="mb-3 font-semibold text-red-700 dark:text-red-400">
+              Інтерактивні елементи
+            </h3>
+            <ul className="space-y-1.5 text-sm">
+              <li>Кнопки лайк/коментар/поділитися (завжди видимі)</li>
+              <li>Поведінка click-to-play</li>
+              <li>Редирект при натисканні на будь-який елемент</li>
+            </ul>
+          </div>
 
-        <h3 className="mb-2 text-lg font-semibold text-red-600">Стилізація</h3>
-        <ul className="mb-4 list-disc pl-6">
-          <li>Внутрішній CSS iframe (обмеження CORS)</li>
-          <li>Колірна схема (слідує бренду TikTok)</li>
-          <li>Шрифти</li>
-        </ul>
+          <div className="rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-800 dark:bg-red-900/20">
+            <h3 className="mb-3 font-semibold text-red-700 dark:text-red-400">Стилізація</h3>
+            <ul className="space-y-1.5 text-sm">
+              <li>Внутрішній CSS iframe (обмеження CORS)</li>
+              <li>Колірна схема (слідує бренду TikTok)</li>
+              <li>Шрифти</li>
+            </ul>
+          </div>
 
-        <h3 className="mb-2 text-lg font-semibold text-yellow-600">
-          Поведінка (частково через Iframe Player)
-        </h3>
-        <ul className="mb-6 list-disc pl-6">
-          <li>
-            Autoplay — <strong>працює</strong> в iframe з <code>muted=1</code> (політика браузерів)
-          </li>
-          <li>
-            Loop — <strong>працює</strong> в iframe з параметром <code>loop=1</code>
-          </li>
-          <li>Гучність за замовчуванням — не контролюється</li>
-        </ul>
+          <div className="rounded-lg border border-yellow-200 bg-yellow-50/50 p-4 dark:border-yellow-800 dark:bg-yellow-900/20">
+            <h3 className="mb-3 font-semibold text-yellow-700 dark:text-yellow-400">
+              Поведінка (частково)
+            </h3>
+            <ul className="space-y-1.5 text-sm">
+              <li>
+                Autoplay — <strong>працює</strong> в iframe з <code>muted=1</code>
+              </li>
+              <li>
+                Loop — <strong>працює</strong> з <code>loop=1</code>
+              </li>
+              <li>Гучність за замовчуванням — не контролюється</li>
+            </ul>
+          </div>
+        </div>
 
         <hr className="my-8" />
 
