@@ -84,9 +84,9 @@ export default function ResearchPage() {
                   Чи можна прибрати метрики (лайки, коментарі)?
                 </td>
                 <td className="px-2 py-3">
-                  <strong>Так, через Iframe Player</strong> — 12 query-параметрів дозволяють
-                  приховати опис, музику, рекомендації, controls та інші елементи UI. В oEmbed —
-                  неможливо.
+                  <strong>Так, через Iframe Player</strong> — 8 підтверджених query-параметрів
+                  дозволяють приховати опис, музику, рекомендації, controls та інші елементи UI. В
+                  oEmbed — неможливо.
                 </td>
                 <td className="px-2 py-3 text-green-600">Iframe: Так</td>
               </tr>
@@ -371,7 +371,7 @@ export default function ResearchPage() {
           <strong>Обгрунтування:</strong>
         </p>
         <ul className="mb-6 list-disc pl-6">
-          <li>12 параметрів кастомізації UI</li>
+          <li>8 підтверджених параметрів кастомізації</li>
           <li>Явне задання розмірів</li>
           <li>Можна приховати непотрібні елементи (рекомендації, опис, музику)</li>
           <li>Autoplay + loop для кращого UX</li>
@@ -552,8 +552,8 @@ export default function ResearchPage() {
           <p className="mb-2 font-semibold">Підсумок:</p>
           <p>
             TikTok embed створений для залучення трафіку на TikTok. Повна кастомізація UI обмежена,
-            але <strong>Direct Iframe Player (/player/v1/)</strong> дає 12 параметрів для
-            налаштування відображення. Рекомендований підхід для Zeely — використовувати iframe
+            але <strong>Direct Iframe Player (/player/v1/)</strong> дає 8 підтверджених параметрів
+            для налаштування відображення. Рекомендований підхід для Zeely — використовувати iframe
             player з оптимальним набором параметрів (rel=0, description=0) для чистого вигляду
             превью.
           </p>
