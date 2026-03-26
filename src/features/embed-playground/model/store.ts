@@ -23,8 +23,9 @@ export const useEmbedPlayground = create<EmbedPlaygroundState>()(
     (set, get) => ({
       config: {
         videoId: DEFAULT_VIDEO_ID,
-        width: 325,
-        height: 700,
+        width: 360,
+        height: 640,
+        oembedMaxWidth: 325,
         ...DEFAULT_IFRAME_CONFIG,
       },
       url: '',

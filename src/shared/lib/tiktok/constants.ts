@@ -5,7 +5,10 @@ export const TABS: { value: TabValue; label: string }[] = [
   { value: 'oembed', label: 'oEmbed' },
 ];
 
-export const DEFAULT_IFRAME_CONFIG: Omit<EmbedConfig, 'videoId' | 'width' | 'height'> = {
+export const DEFAULT_IFRAME_CONFIG: Omit<
+  EmbedConfig,
+  'videoId' | 'width' | 'height' | 'oembedMaxWidth'
+> = {
   autoplay: false,
   muted: false,
   loop: false,

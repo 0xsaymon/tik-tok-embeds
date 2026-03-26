@@ -6,7 +6,7 @@ import { DEFAULT_IFRAME_CONFIG, parseTikTokUrl } from '@/shared/lib/tiktok';
 
 import type { GridVideo } from './types';
 
-type IframeConfig = Omit<EmbedConfig, 'videoId' | 'width' | 'height'>;
+type IframeConfig = Omit<EmbedConfig, 'videoId' | 'width' | 'height' | 'oembedMaxWidth'>;
 
 interface EmbedGridState {
   videos: GridVideo[];

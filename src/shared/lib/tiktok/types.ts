@@ -2,6 +2,7 @@ export interface EmbedConfig {
   videoId: string;
   width: number;
   height: number;
+  oembedMaxWidth: number;
   // Iframe player params (/player/v1/) — verified working
   autoplay: boolean;
   muted: boolean;

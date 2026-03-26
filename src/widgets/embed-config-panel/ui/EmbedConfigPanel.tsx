@@ -136,8 +136,8 @@ export default function EmbedConfigPanel({
           {!compact && <Label>Макс. ширина (px)</Label>}
           <Input
             type="number"
-            value={config.width}
-            onChange={e => onConfigChange({ width: parseInt(e.target.value) })}
+            value={config.oembedMaxWidth}
+            onChange={e => onConfigChange({ oembedMaxWidth: parseInt(e.target.value) })}
             className={compact ? 'h-8 w-20 text-xs' : ''}
             placeholder="Width"
           />
