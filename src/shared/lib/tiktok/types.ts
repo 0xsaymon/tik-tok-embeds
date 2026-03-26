@@ -2,7 +2,7 @@ export interface EmbedConfig {
   videoId: string;
   width: number;
   height: number;
-  // Iframe player params (/player/v1/)
+  // Iframe player params (/player/v1/) — verified working
   autoplay: boolean;
   muted: boolean;
   loop: boolean;
@@ -10,10 +10,6 @@ export interface EmbedConfig {
   description: boolean;
   rel: boolean;
   controls: boolean;
-  progressBar: boolean;
-  playButton: boolean;
-  volumeControl: boolean;
-  fullscreenButton: boolean;
   timestamp: boolean;
 }
 

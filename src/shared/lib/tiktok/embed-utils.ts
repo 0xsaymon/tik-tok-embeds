@@ -9,10 +9,6 @@ export function buildIframeUrl(config: EmbedConfig): string {
     description: config.description ? '1' : '0',
     rel: config.rel ? '1' : '0',
     controls: config.controls ? '1' : '0',
-    progress_bar: config.progressBar ? '1' : '0',
-    play_button: config.playButton ? '1' : '0',
-    volume_control: config.volumeControl ? '1' : '0',
-    fullscreen_button: config.fullscreenButton ? '1' : '0',
     timestamp: config.timestamp ? '1' : '0',
   });
   return `https://www.tiktok.com/player/v1/${config.videoId}?${params.toString()}`;

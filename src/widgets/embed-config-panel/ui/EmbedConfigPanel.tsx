@@ -57,18 +57,9 @@ const IFRAME_CONTROLS: {
     ],
   },
   {
-    group: 'Інтерфейс',
+    group: 'Контент та UI',
     items: [
-      { id: 'controls', label: 'Управління', key: 'controls' },
-      { id: 'progress-bar', label: 'Прогрес-бар', key: 'progressBar' },
-      { id: 'play-button', label: 'Кнопка Play', key: 'playButton' },
-      { id: 'volume-control', label: 'Гучність', key: 'volumeControl' },
-      { id: 'fullscreen-button', label: 'Повний екран', key: 'fullscreenButton' },
-    ],
-  },
-  {
-    group: 'Контент',
-    items: [
+      { id: 'controls', label: 'Панель управління', key: 'controls' },
       { id: 'music-info', label: 'Інфо про музику', key: 'musicInfo' },
       { id: 'description', label: 'Опис', key: 'description' },
       { id: 'rel', label: 'Рекомендовані', key: 'rel' },

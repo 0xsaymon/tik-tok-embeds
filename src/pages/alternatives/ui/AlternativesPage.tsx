@@ -75,7 +75,7 @@ const alternatives: Alternative[] = [
     status: 'recommended',
     description: 'Використати TikTok iframe player з 12 query-параметрами для кастомізації',
     pros: [
-      '12 параметрів кастомізації (controls, description, music, rel та ін.)',
+      '8 підтверджених параметрів (controls, description, music_info, rel, timestamp та ін.)',
       'Явне задання width/height',
       'Autoplay з muted, циклічне відтворення (loop)',
       'Можна приховати рекомендовані відео (rel=0)',

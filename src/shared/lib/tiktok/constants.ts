@@ -13,9 +13,5 @@ export const DEFAULT_IFRAME_CONFIG: Omit<EmbedConfig, 'videoId' | 'width' | 'hei
   description: true,
   rel: true,
   controls: true,
-  progressBar: true,
-  playButton: true,
-  volumeControl: true,
-  fullscreenButton: true,
   timestamp: true,
 };

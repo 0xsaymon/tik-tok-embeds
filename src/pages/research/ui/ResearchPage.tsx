@@ -162,7 +162,7 @@ export default function ResearchPage() {
           </code>
         </p>
 
-        <h4 className="mb-2 font-semibold">Доступні query-параметри (12):</h4>
+        <h4 className="mb-2 font-semibold">Доступні query-параметри (8 підтверджених):</h4>
         <div className="-mx-4 mb-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
           <table className="w-full min-w-[500px] border-collapse text-sm">
             <thead>
@@ -224,33 +224,33 @@ export default function ResearchPage() {
                 <td className="px-2 py-2">1</td>
                 <td className="px-2 py-2">Показувати елементи управління</td>
               </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
+              <tr className="border-b bg-red-950/20">
+                <td className="px-2 py-2 line-through opacity-60">
                   <code>progress_bar</code>
                 </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати прогрес-бар</td>
+                <td className="px-2 py-2 opacity-60">—</td>
+                <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
               </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
+              <tr className="border-b bg-red-950/20">
+                <td className="px-2 py-2 line-through opacity-60">
                   <code>play_button</code>
                 </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати кнопку відтворення</td>
+                <td className="px-2 py-2 opacity-60">—</td>
+                <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
               </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
+              <tr className="border-b bg-red-950/20">
+                <td className="px-2 py-2 line-through opacity-60">
                   <code>volume_control</code>
                 </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати регулятор гучності</td>
+                <td className="px-2 py-2 opacity-60">—</td>
+                <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
               </tr>
-              <tr className="border-b">
-                <td className="px-2 py-2">
+              <tr className="border-b bg-red-950/20">
+                <td className="px-2 py-2 line-through opacity-60">
                   <code>fullscreen_button</code>
                 </td>
-                <td className="px-2 py-2">1</td>
-                <td className="px-2 py-2">Показувати кнопку повного екрану</td>
+                <td className="px-2 py-2 opacity-60">—</td>
+                <td className="px-2 py-2 text-red-400">Не працює (перевірено)</td>
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-2">
@@ -265,7 +265,7 @@ export default function ResearchPage() {
 
         <h4 className="mb-2 font-semibold">Переваги:</h4>
         <ul className="mb-4 list-disc pl-6">
-          <li>12 параметрів кастомізації</li>
+          <li>8 підтверджених параметрів кастомізації</li>
           <li>Явне задання розмірів (width/height)</li>
           <li>Можна приховати: опис, музику, рекомендації, прогрес-бар та інше</li>
           <li>Autoplay з muted=1 працює у більшості браузерів</li>
@@ -528,7 +528,7 @@ export default function ResearchPage() {
               </tr>
               <tr className="border-b">
                 <td className="px-2 py-2">Приховати елементи UI</td>
-                <td className="px-2 py-2 text-green-600">Iframe: 12 параметрів</td>
+                <td className="px-2 py-2 text-green-600">Iframe: 8 параметрів</td>
                 <td className="px-2 py-2">—</td>
                 <td className="px-2 py-2">Опис, музика, рекомендації, controls та ін.</td>
               </tr>
