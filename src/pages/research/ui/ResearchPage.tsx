@@ -459,62 +459,6 @@ export default function ResearchPage() {
 
         <hr className="my-8" />
 
-        <h2 className="mb-4 text-2xl font-semibold">Рекомендації для Zeely</h2>
-
-        <h3 className="mb-3 text-xl font-semibold">Для MVP (Фаза 1)</h3>
-        <p className="mb-2 font-semibold">Використовувати Direct Iframe Player (/player/v1/)</p>
-        <div className="bg-muted -mx-4 mb-4 rounded-lg p-4 sm:mx-0">
-          <pre className="overflow-x-auto text-xs sm:text-sm">
-            <code>{`<iframe
-  src="https://www.tiktok.com/player/v1/{videoId}?controls=1&progress_bar=1&play_button=1&rel=0&music_info=0"
-  width="325"
-  height="700"
-  allow="fullscreen"
-/>`}</code>
-          </pre>
-        </div>
-        <p className="mb-2">
-          <strong>Обгрунтування:</strong>
-        </p>
-        <ul className="mb-6 list-disc pl-6">
-          <li>10 підтверджених параметрів кастомізації</li>
-          <li>Явне задання розмірів</li>
-          <li>Можна приховати непотрібні елементи (рекомендації, опис, музику)</li>
-          <li>Autoplay + loop для кращого UX</li>
-        </ul>
-
-        <h3 className="mb-3 text-xl font-semibold">Для покращеного UX (Фаза 2)</h3>
-        <p className="mb-2 font-semibold">Мініатюра + lazy load iframe</p>
-        <ol className="mb-4 list-decimal pl-6">
-          <li>Отримати дані oEmbed API на сервері (включає мініатюру)</li>
-          <li>Показати кастомну картку з мініатюрою, назвою, автором</li>
-          <li>Завантажити iframe тільки при взаємодії (клік/скрол)</li>
-          <li>Зменшити навантаження — без iframe до потреби</li>
-        </ol>
-        <p className="mb-2">
-          <strong>Переваги:</strong>
-        </p>
-        <ul className="mb-6 list-disc pl-6">
-          <li>Кастомний UI Zeely для сітки/списку</li>
-          <li>Продуктивність (без iframe до потреби)</li>
-          <li>Краща візуальна інтеграція</li>
-        </ul>
-
-        <h3 className="mb-3 text-xl font-semibold">Що повідомити користувачам</h3>
-        <p className="mb-4">
-          Оскільки повна кастомізація неможлива, потрібно оновити UI-копірайт для встановлення
-          очікувань:
-        </p>
-        <blockquote className="border-muted my-4 border-l-4 pl-4 italic">
-          &quot;Попередній перегляд від TikTok. Натисніть, щоб переглянути на TikTok.&quot;
-        </blockquote>
-        <p>
-          Або використовувати embed як &quot;тізер&quot;, що спрямовує трафік на TikTok для повного
-          перегляду.
-        </p>
-
-        <hr className="my-8" />
-
         <h2 className="mb-4 text-2xl font-semibold">Посилання</h2>
         <ol className="mb-8 list-decimal pl-6">
           <li className="mb-2">
@@ -572,33 +516,61 @@ export default function ResearchPage() {
         <hr className="my-8" />
 
         <h2 className="mb-4 text-2xl font-semibold">Результати тестування</h2>
-        <p className="mb-4">
-          Протестовані конфігурації доступні на:{' '}
-          <a
-            href="https://tik-tok-embeds.vercel.app/playground"
-            className="text-blue-500 hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://tik-tok-embeds.vercel.app/playground
-          </a>
+        <p className="text-muted-foreground mb-4">
+          Протестовані конфігурації доступні на інтерактивних сторінках:
         </p>
+        <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <Link
+            to="/?tab=iframe"
+            className="rounded-lg border p-4 transition-colors hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/20"
+          >
+            <h4 className="font-semibold">Пісочниця (Iframe)</h4>
+            <p className="text-muted-foreground text-sm">
+              Інтерактивне тестування параметрів одного відео
+            </p>
+          </Link>
+          <Link
+            to="/?tab=oembed"
+            className="rounded-lg border p-4 transition-colors hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/20"
+          >
+            <h4 className="font-semibold">Пісочниця (oEmbed)</h4>
+            <p className="text-muted-foreground text-sm">Стандартний TikTok embed з blockquote</p>
+          </Link>
+          <Link
+            to="/grid"
+            className="rounded-lg border p-4 transition-colors hover:border-blue-400 hover:bg-blue-50/50 sm:col-span-2 dark:hover:bg-blue-900/20"
+          >
+            <h4 className="font-semibold">Сітка</h4>
+            <p className="text-muted-foreground text-sm">
+              Кілька відео одночасно з глобальними та per-video налаштуваннями
+            </p>
+          </Link>
+        </div>
 
-        <h3 className="mb-2 text-lg font-semibold">Тестове відео</h3>
-        <ul className="mb-8 list-disc pl-6">
-          <li>
-            <strong>ID:</strong> 7598731566696729870
-          </li>
-          <li>
-            <strong>Автор:</strong> @wilbur.maud
-          </li>
-          <li>
-            <strong>Контент:</strong> Тестове відео для перевірки embed
-          </li>
-          <li>
-            <strong>Статус:</strong> <span className="text-green-600">Embed працює коректно</span>
-          </li>
-        </ul>
+        <h3 className="mb-3 text-lg font-semibold">Тестові відео</h3>
+        <div className="mb-8 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {[
+            { id: '7620887262770760982', author: '@_.thys._' },
+            { id: '7543789467740458271', author: '@queefquack123' },
+            { id: '7541605713617882399', author: '@marykatenoashley' },
+            { id: '7573311210620259615', author: '@dudevaeh' },
+            { id: '7581608398815284498', author: '@samhooper_' },
+            { id: '7579295333071473927', author: '@camimiminini' },
+            { id: '7573904830461234487', author: '@71cent' },
+            { id: '7583832764869397782', author: '@spaghetillie' },
+          ].map(v => (
+            <a
+              key={v.id}
+              href={`https://www.tiktok.com/player/v1/${v.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-muted hover:bg-muted/70 truncate rounded-lg px-3 py-2 text-xs transition-colors"
+            >
+              <span className="block truncate font-mono">{v.id}</span>
+              <span className="text-muted-foreground block truncate">{v.author}</span>
+            </a>
+          ))}
+        </div>
 
         <hr className="my-8" />
 
@@ -648,7 +620,6 @@ export default function ResearchPage() {
         </div>
 
         <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20">
-          <p className="mb-2 font-semibold">Підсумок:</p>
           <p>
             TikTok embed створений для залучення трафіку на TikTok. Повна кастомізація UI обмежена,
             але <strong>Direct Iframe Player (/player/v1/)</strong> дає 10 підтверджених параметрів
