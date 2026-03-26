@@ -7,6 +7,7 @@ interface EmbedPreviewProps {
   activeTab: TabValue;
   config: EmbedConfig;
   iframeUrl: string;
+  onConfigChange?: (partial: Partial<EmbedConfig>) => void;
 }
 
 function useContainerSize(ref: React.RefObject<HTMLDivElement | null>) {
@@ -33,9 +34,15 @@ function useContainerSize(ref: React.RefObject<HTMLDivElement | null>) {
   return size;
 }
 
-export default function EmbedPreview({ activeTab, config, iframeUrl }: EmbedPreviewProps) {
+export default function EmbedPreview({
+  activeTab,
+  config,
+  iframeUrl,
+  onConfigChange,
+}: EmbedPreviewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const container = useContainerSize(containerRef);
+  const initialSyncDone = useRef(false);
 
   useEffect(() => {
     if (activeTab === 'oembed') {
@@ -44,8 +51,32 @@ export default function EmbedPreview({ activeTab, config, iframeUrl }: EmbedPrev
     }
   }, [activeTab, config.videoId]);
 
+  // Sync calculated size to config inputs on first render
+  useEffect(() => {
+    if (
+      activeTab === 'iframe' &&
+      container.width > 0 &&
+      container.height > 0 &&
+      onConfigChange &&
+      !initialSyncDone.current
+    ) {
+      const aspect = config.width / config.height;
+      let w = container.width;
+      let h = w / aspect;
+      if (h > container.height) {
+        h = container.height;
+        w = h * aspect;
+      }
+      const newW = Math.floor(w);
+      const newH = Math.floor(h);
+      if (newW !== config.width || newH !== config.height) {
+        onConfigChange({ width: newW, height: newH });
+      }
+      initialSyncDone.current = true;
+    }
+  }, [activeTab, container, config.width, config.height, onConfigChange]);
+
   if (activeTab === 'iframe') {
-    // Calculate iframe size to fit container while preserving aspect ratio
     const aspect = config.width / config.height;
     let iframeW = container.width;
     let iframeH = iframeW / aspect;

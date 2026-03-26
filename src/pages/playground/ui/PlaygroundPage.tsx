@@ -112,7 +112,12 @@ export default function PlaygroundPage() {
           <div className="col-span-2 flex min-h-0 flex-col">
             <TabButtons activeTab={activeTab} onTabChange={handleTabChange} className="shrink-0" />
             <div className="min-h-0 flex-1 pt-4">
-              <EmbedPreview activeTab={activeTab} config={config} iframeUrl={iframeUrl} />
+              <EmbedPreview
+                activeTab={activeTab}
+                config={config}
+                iframeUrl={iframeUrl}
+                onConfigChange={updateConfig}
+              />
             </div>
           </div>
         </div>
