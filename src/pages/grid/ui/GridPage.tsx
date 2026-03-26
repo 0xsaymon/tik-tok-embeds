@@ -28,11 +28,16 @@ export default function GridPage() {
     globalConfig,
     urlInput,
     columns,
+    settingsOpenId,
     globalSettingsOpen,
     setUrlInput,
     applyUrls,
+    removeVideo,
+    updateVideoOverrides,
+    clearVideoOverrides,
     updateGlobalConfig,
     setColumns,
+    setSettingsOpenId,
     setGlobalSettingsOpen,
   } = useEmbedGrid();
 
@@ -152,7 +157,19 @@ export default function GridPage() {
           style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
         >
           {mergedConfigs.map(({ video, config }) => (
-            <GridCell key={video.id} video={video} mergedConfig={config} />
+            <GridCell
+              key={video.id}
+              video={video}
+              mergedConfig={config}
+              isSettingsOpen={settingsOpenId === video.id}
+              onSettingsToggle={() =>
+                setSettingsOpenId(settingsOpenId === video.id ? null : video.id)
+              }
+              onSettingsClose={() => setSettingsOpenId(null)}
+              onUpdateOverrides={overrides => updateVideoOverrides(video.id, overrides)}
+              onClearOverrides={() => clearVideoOverrides(video.id)}
+              onRemove={() => removeVideo(video.id)}
+            />
           ))}
         </div>
       )}

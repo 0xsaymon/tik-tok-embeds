@@ -2,7 +2,6 @@ import { Settings, Trash2, X } from 'lucide-react';
 import { useMemo } from 'react';
 
 import type { GridVideo } from '@/features/embed-grid';
-import { useEmbedGrid } from '@/features/embed-grid';
 import type { EmbedConfig } from '@/shared/lib/tiktok';
 import { buildIframeUrl } from '@/shared/lib/tiktok';
 import { Switch } from '@/shared/ui-kit/components/ui/switch';
@@ -23,19 +22,25 @@ const TOGGLE_ITEMS: { label: string; key: keyof EmbedConfig }[] = [
 interface GridCellProps {
   video: GridVideo;
   mergedConfig: EmbedConfig;
+  isSettingsOpen: boolean;
+  onSettingsToggle: () => void;
+  onSettingsClose: () => void;
+  onUpdateOverrides: (overrides: Partial<EmbedConfig>) => void;
+  onClearOverrides: () => void;
+  onRemove: () => void;
 }
 
-export default function GridCell({ video, mergedConfig }: GridCellProps) {
-  const {
-    settingsOpenId,
-    setSettingsOpenId,
-    updateVideoOverrides,
-    clearVideoOverrides,
-    removeVideo,
-  } = useEmbedGrid();
-
+export default function GridCell({
+  video,
+  mergedConfig,
+  isSettingsOpen,
+  onSettingsToggle,
+  onSettingsClose,
+  onUpdateOverrides,
+  onClearOverrides,
+  onRemove,
+}: GridCellProps) {
   const iframeUrl = useMemo(() => buildIframeUrl(mergedConfig), [mergedConfig]);
-  const isSettingsOpen = settingsOpenId === video.id;
   const hasOverrides = !!video.configOverrides && Object.keys(video.configOverrides).length > 0;
 
   return (
@@ -50,10 +55,9 @@ export default function GridCell({ video, mergedConfig }: GridCellProps) {
         />
       </div>
 
-      {/* Action buttons — visible on hover (desktop) or always (mobile) */}
       <div className="absolute top-2 right-2 flex gap-1 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100">
         <button
-          onClick={() => setSettingsOpenId(isSettingsOpen ? null : video.id)}
+          onClick={onSettingsToggle}
           className={`rounded-lg p-1.5 backdrop-blur transition-colors ${
             isSettingsOpen
               ? 'bg-primary text-primary-foreground'
@@ -63,7 +67,7 @@ export default function GridCell({ video, mergedConfig }: GridCellProps) {
           <Settings className="h-4 w-4" />
         </button>
         <button
-          onClick={() => removeVideo(video.id)}
+          onClick={onRemove}
           className="bg-background/80 hover:bg-destructive hover:text-destructive-foreground rounded-lg p-1.5 backdrop-blur transition-colors"
         >
           <Trash2 className="h-4 w-4" />
@@ -74,7 +78,6 @@ export default function GridCell({ video, mergedConfig }: GridCellProps) {
         <div className="bg-primary absolute top-2 left-2 h-2 w-2 rounded-full" />
       )}
 
-      {/* Per-video settings overlay */}
       {isSettingsOpen && (
         <div className="bg-background/95 absolute inset-x-0 bottom-0 border-t p-3 backdrop-blur">
           <div className="mb-2 flex items-center justify-between">
@@ -82,14 +85,14 @@ export default function GridCell({ video, mergedConfig }: GridCellProps) {
             <div className="flex gap-1">
               {hasOverrides && (
                 <button
-                  onClick={() => clearVideoOverrides(video.id)}
+                  onClick={onClearOverrides}
                   className="text-muted-foreground hover:text-foreground text-xs underline"
                 >
                   Скинути
                 </button>
               )}
               <button
-                onClick={() => setSettingsOpenId(null)}
+                onClick={onSettingsClose}
                 className="text-muted-foreground hover:text-foreground"
               >
                 <X className="h-4 w-4" />
@@ -102,9 +105,7 @@ export default function GridCell({ video, mergedConfig }: GridCellProps) {
                 <Switch
                   size="sm"
                   checked={mergedConfig[item.key] as boolean}
-                  onCheckedChange={checked =>
-                    updateVideoOverrides(video.id, { [item.key]: checked })
-                  }
+                  onCheckedChange={checked => onUpdateOverrides({ [item.key]: checked })}
                 />
                 <span>{item.label}</span>
               </label>
