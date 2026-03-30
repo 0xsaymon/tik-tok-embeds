@@ -4,7 +4,7 @@ import { persist } from 'zustand/middleware';
 import type { EmbedConfig, TabValue } from '@/shared/lib/tiktok';
 import { DEFAULT_IFRAME_CONFIG, parseTikTokUrl } from '@/shared/lib/tiktok';
 
-const DEFAULT_VIDEO_ID = '7620887262770760982';
+const DEFAULT_VIDEO_ID = '7592218848133188895';
 
 export interface EmbedPlaygroundState {
   config: EmbedConfig;

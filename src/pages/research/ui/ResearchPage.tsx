@@ -577,7 +577,7 @@ export default function ResearchPage() {
         <h3 className="mb-3 text-lg font-semibold">Тестові відео</h3>
         <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            { id: '7620887262770760982', author: '@_.thys._' },
+            { id: '7592218848133188895', author: '@cucusneaker' },
             { id: '7543789467740458271', author: '@queefquack123' },
             { id: '7541605713617882399', author: '@marykatenoashley' },
             { id: '7573311210620259615', author: '@dudevaeh' },
